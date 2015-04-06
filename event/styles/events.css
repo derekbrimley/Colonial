@@ -1,0 +1,29 @@
+.item_container {
+	display: inline-block;
+	margin: 25px;
+	padding: 5px;
+
+	border: 2px solid rgb(35, 30, 94);
+	border-radius: 4px;
+	vertical-align: middle;
+	width: 500px;
+	height: 550px;
+}
+
+.item_container > img {
+	max-width: 425px;
+	max-height: 275px;
+	margin-top: 25px;
+	vertical-align: bottom;
+	border: 10px solid rgb(35, 30, 94);
+}
+
+.events{
+	text-align: center;
+}
+/*
+.event_name{
+	margin-top: 5px;
+	font-size: 20px;
+	font-family: 
+}*/

@@ -1,0 +1,168 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Rentals</div>
+</%block>
+
+
+
+<%block name="contents">
+	##For the >= agent
+	##params['transactions'] = transactions
+	##params['rentals'] = rentals
+	##params['products'] = products
+	##params['users'] = users
+	##params['fees'] = fees
+
+	%if request.user.has_perm('home.agent'):
+		##If the transactions exist
+		%if transactions:
+			<table id="display_table" class="table table-striped table-bordered">
+				
+				<tr>
+					<th>Rental ID</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Price</th>
+					<th>Date Rented</th>
+					<th>Date Due</th>
+					<th>Status</th>
+					<th>Product</th>
+					<th>Fee</th>
+					<th>Actions</th>
+				</tr>
+
+			##For each photo in the photographs [received from params in product.py]	
+				<tr>
+					%for rental in rentals:
+						%for transaction in transactions:
+							%if rental.transaction_id == transaction.id:
+								<td>${rental.id}</td>
+
+								%for user in users:
+									%if transaction.customer_id == user.id:
+										<td>${user.first_name} ${user.last_name}</td>
+										<td>${user.email}</td>
+									%endif
+								%endfor
+
+								<td>${rental.price}</td>
+								<td>${rental.date_out}</td>
+								<td>${rental.date_due}</td>
+								
+								%if rental.date_in is not None:
+									<td id="green">Returned</td>
+								%else:
+									<td id="red">Renting</td>
+								%endif
+
+								%for product in products:
+									%if product.id == rental.rentable_product_id:
+										<td>${product.name}</td>
+									%endif
+								%endfor
+							%endif
+						%endfor
+
+##The fee needs to just insert once. This is also breaking my code because it sends all 4 fee ids over. I want to just send one.
+
+						<td>
+							%for fee in fees:
+								%if fee.rental_item_id == rental.id:
+									<p id="red">Yes</p>
+						  		%endif
+						  	%endfor
+						</td>
+						## %if fees:
+						## 	%for fee in fees:
+						## 		%if fee.rental_item_id == rental.id:
+						## 			<td id="red">Yes</td>
+						## 		%else:
+						## 			<td id="green">No</td>
+						## 		%endif
+						## 	%endfor
+
+						## %else:
+						## 	<td>No</td>
+						## %endif
+
+						<td>
+							<a href="/rental/rentals.edit/${rental.id}/${transaction.id}/${user.id}/${product.id}/">Edit</a> | 
+							<a href="/rental/rentals.delete/${rental.id}/${transaction.id}/${user.id}/${product.id}/${fee.id}">Delete</a>
+						</td>
+
+					</tr>
+					%endfor
+			</table>
+
+			<div class="text-center">
+				<a href="/rental/rentals/" class="btn btn btn-primary ">Back</a>
+				<a href="/rental/rentals.add_customer/" class="btn btn btn-success">Add New Rental</a>
+			</div>
+		
+		##If there are no transactions
+		%else:
+			<div class="text-center" >
+				<h3>Dear ${ request.user.first_name }, No rentals found! Either you dont have anything checked out, or our inventory was thrown in the Boston Harbor!</h3>
+			</div>
+			<img id="boston" src="${ STATIC_URL }rental/media/icons/boston.jpg" />
+		%endif
+
+
+	##For the customer
+	##transactions = hmod.Transaction.objects.filter(customer_id=request.user.id)
+	##rentals = hmod.RentalItem.objects.all()
+	##products = hmod.ProductSpecification.objects.all()
+   	%elif request.user.is_authenticated():
+		##If the transactions exist
+		%if transactions:
+			<table id="display_table" class="table table-striped table-bordered">
+				
+				<tr>
+					<th>Rental ID</th>
+					<th>Price</th>
+					<th>Date Rented</th>
+					<th>Date Due</th>
+					<th>Status</th>
+					<th>Product</th>
+					<th>Fee</th>
+				</tr>
+
+			##For each photo in the photographs [received from params in product.py]	
+				<tr>
+					%for rental in rentals:
+						%for transaction in transactions:
+							%if rental.transaction_id == transaction.id:
+								<td>${rental.id}</td>
+								<td>${rental.price}</td>
+								<td>${rental.date_out}</td>
+								<td>${rental.date_due}</td>
+								
+								%if rental.date_in is not None:
+									<td id="green">Returned</td>
+								%else:
+									<td id="red">Renting</td>
+								%endif
+
+								%for product in products:
+									%if product.id == rental.rentable_product_id:
+										<td>${product.name}</td>
+									%endif
+								%endfor
+							%endif
+						%endfor
+					</tr>
+					%endfor
+			</table>
+		
+		##If there are no transactions for this person.
+		%else:
+			<div class="text-center" >
+				<h3>Dear ${ request.user.first_name }, No rentals found! Either you dont have anything checked out, or our inventory was thrown in the Boston Harbor!</h3>
+			</div>
+			<img id="boston" src="${ STATIC_URL }rental/media/icons/boston.jpg" />
+		%endif
+
+	%endif
+
+</%block>

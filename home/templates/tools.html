@@ -1,0 +1,58 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Tools</div>
+</%block>
+
+
+
+<%block name="contents">
+
+	%if request.user.has_perm('home.agent'):
+
+		<table id="display_table" class="table table-striped table-bordered">
+			<tr>
+				<th>Tool Name</th>
+				<th>Purpose</th>
+				<th>Rights</th>
+				<th>Run</th>
+			</tr>
+
+			<tr>			
+				<td>Overdue Items</td>
+				<td>Return a list of overdue rentals</td>
+				<td>Yes</td>
+				<td><a class="btn btn-md btn-success" href="/home/overdue_items">Run</a></td>
+			</tr>
+			<tr>			
+				<td>Tool 2</td>
+				<td>Do something cool</td>
+				<td>Yes</td>
+				<td><a class="btn btn-md btn-success" href="/home/overdue_items">Run</a></td>
+			</tr>
+			<tr>			
+				<td>Tool 3</td>
+				<td>Do something similar to the others</td>
+				<td>Yes</td>
+				<td><a class="btn btn-md btn-success" href="/home/overdue_items">Run</a></td>
+			</tr>
+		</table>
+
+	%else:
+
+		<table id="display_table" class="table table-striped table-bordered">
+			<tr>
+				<th>Tool Name</th>
+				<th>Purpose</th>
+				<th>Rights</th>
+			</tr>
+
+			<tr>			
+				<td>Overdue Items</td>
+				<td>Return a list of overdue rentals</td>
+				<td>No</td>
+			</tr>
+		</table>
+
+	%endif
+</%block>

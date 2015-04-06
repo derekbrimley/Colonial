@@ -1,0 +1,173 @@
+## this is the skeleton of all pages on in this app - it defines the basic html tags
+
+## set up a StaticRenderer object to enable the CSS/JS automatic inclusion magic.
+<%! from django_mako_plus.controller import static_files %>
+<%  static_renderer = static_files.StaticRenderer(self) %>
+
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+
+  <head>
+    <%block name="title">
+      <title>Colonial</title>
+      <meta name="Colonial Heritage Foundation Home Page" content="The Colonial Heritage Foundation promotes actively engaging the mind in history. The foundation will provide you with the resources to go back in time and live the colonial years. Attend colonial events, purchase colonial products, rent colonial wardrobe and other items. ">
+    </%block>
+  
+    ## add any site-wide scripts or CSS here; for example, jquery:
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src=${ STATIC_URL }home/media/jquery.form.js></script>
+    <script src=${ STATIC_URL }home/media/jquery.loadmodal.js></script>
+  
+  
+    ## render the css with the same name as this page
+    ${ static_renderer.get_template_css(request, context)  }
+  
+  </head>
+
+
+  <!-- <body background="${ STATIC_URL }home/media/paper2.jpg"> -->
+
+  
+  
+    %if request.user.is_authenticated():
+    <div class="login_button" style="white-space:nowrap;">
+        <label class="welcome label label-success">Welcome, ${user.get_username()}</label>
+        <a href="/user/login.logout_view/" class="btn btn-primary">Sign Out</a>
+        <button class="show_button btn btn btn-warning">Show Cart</button>
+      </div>
+    %else:
+      <div class="login_button" style="white-space:nowrap;">
+        <label class="welcome label label-danger">Welcome, Guest</label>
+        <!-- <a href="/user/login" class="btn btn-primary">Sign In</a> -->
+        <button class="show_login_dialog btn btn-primary">Sign In</button>
+        <a href="/password_reset/" class="btn btn-default">Forgot Password?</a>
+      </div>
+
+    %endif
+
+
+
+  <header background='none'>
+    <img class="headertitle" src="${ STATIC_URL }home/media/colonialheritage.png" alt="The Colonial Heritage Foundation" >
+  </header>
+  
+    
+  <body>
+    <div class="container-fluid">      
+      <!--<div class="row">
+          <div class="col-xs-12">
+           <img class="headerphoto" src="${ STATIC_URL }home/media/sign.jpg" alt="The Signing" > 
+          </div>
+        </div> -->
+
+      <div class="row">
+        <nav id="myNavbar" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="container-nav">
+
+            %if request.user.has_perm('home.agent'):
+              <!-- If the person is not a guest -->
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav nav-justified">
+                  <li><a href="http://localhost:8000/home/index" target="">Home</a></li>
+                  <li><a href="http://localhost:8000/user/user" target="">Accounts</a></li>
+                  <li><a href="http://localhost:8000/event/events" target="">Events</a></li>
+                  <li><a href="http://localhost:8000/home/items" target="">Inventory</a></li>
+                  <li><a href="http://localhost:8000/product/products" target="">Products</a></li>
+                  <li><a href="http://localhost:8000/rental/rentals" target="">Rentals</a></li>
+                  <li><a href="http://localhost:8000/home/tools" target="">Tools</a></li>
+                  <li><a href="http://localhost:8000/home/about" target="">About Us</a></li>
+                </ul>
+              </div> 
+
+            %elif request.user.is_authenticated():
+              <!--Guest-->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <ul class="nav nav-justified">
+                      <li><a href="http://localhost:8000/home/index" target="">Home</a></li>
+                      <li><a href="http://localhost:8000/user/user" target="">My Account</a></li>
+                      <li><a href="http://localhost:8000/rental/rentals.view" target="">My Rentals</a></li>
+                      <li><a href="http://localhost:8000/home/orders" target="">My Orders</a></li>
+                      <li><a href="http://localhost:8000/event/events" target="">Events</a></li>
+                      <li><a href="http://localhost:8000/product/products" target="">Products</a></li>
+
+                      <li><a href="http://localhost:8000/home/about" target="">About Us</a></li>
+                  </ul>
+                </div>
+
+            %else:
+              <!--Guest-->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <ul class="nav nav-justified">
+                      <li><a href="http://localhost:8000/home/index" target="">Home</a></li>
+                      <li><a href="http://localhost:8000/event/events" target="">Events</a></li>
+                      <li><a href="http://localhost:8000/product/products" target="">Products</a></li>
+                      <li><a href="http://localhost:8000/home/about" target="">About Us</a></li>
+                      <li><a class="show_join_dialog" target="">Join Us</a></li>
+                      <!-- <li><a class="show_join_dialog" href="http://localhost:8000/user/join" target="">Join Us</a></li> -->
+            
+                  </ul>
+                </div>
+
+            %endif
+  
+              
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  <hr>
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <%block name="top_banner">
+            <div class="top_banner">Welcome to the Colonial Heritage Foundation</div>
+          </%block> 
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <%block name="contents">
+            <img id="maincenter" src="${ STATIC_URL }home/media/colonialman.jpg" alt="Colonial Man" border="5" >
+          </%block> 
+        </div>
+      </div>
+        
+    <hr>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <footer>
+            <p>&copy; Copyright 2015 dwb</p>
+          </footer>
+        </div>
+      </div>
+
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+    ## render the JS with the same name as this page
+    ${ static_renderer.get_template_js(request, context)  }
+  
+  </body>
+</html>

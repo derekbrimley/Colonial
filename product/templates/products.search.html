@@ -1,0 +1,24 @@
+<%inherit file="/home/templates/base_ajax.htm" />
+
+<%block name="contents">
+		<div class="top_banner">Search Results</div>
+
+    ##These are the params that were passed to this page
+	##params['photographs'] = photographs
+	##params['products'] = products
+
+	##For each photo in the photographs [received from params in product.py]
+	%for photo in photographs:
+		<div class="item_container text-center">
+		%for product in products:
+			%if product.id == photo.id:
+				<img src="${ STATIC_URL }product/media/products/${ photo.id}.jpg" />
+				<div class="text-muted">${ product.name }</div>
+				<div class="text-muted">${ product.price }</div>
+			%endif
+		%endfor
+		</div>
+	%endfor
+
+
+</%block>

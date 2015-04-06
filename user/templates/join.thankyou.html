@@ -1,0 +1,28 @@
+<%inherit file="/user/templates/base_ajax.htm" />
+
+##This Thank you page appears after someone successfully creates an account
+
+<%block name="contents">
+<div class="top_banner">Thank You!</div>
+	   	<div class="row">
+            <div class="col-xs-12">
+                
+             <img id="about_photo" src="${ STATIC_URL }home/media/joinordie.jpg" alt="Thank You" >
+
+    		</div>
+        </div> 
+
+
+        <div id="text">
+	        <h3>Join or Die (attributed to Benjamin Franklin)</h3>
+	        <p>
+	        This cartoon originally appeared during the French and Indian War. It was recycled to stimulate the American Colonies to unite against the British Rule. We are grateful you have joined us! Together we will preserve our nations Divine History.
+	        </p>
+	    </div>
+
+	    <div class="text-center">
+	    <a href="/home/index/" class="btn btn-info">Home</a>
+	    </div>
+
+	
+</%block>

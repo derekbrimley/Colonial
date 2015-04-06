@@ -1,0 +1,16 @@
+.item_container {
+display: inline-block;
+margin: 25px;
+padding: 5px;
+border-radius: 4px;
+vertical-align: middle;
+margin-top: 30px;
+text-align: center;
+
+}
+
+.item_container > img {
+	max-width: 200px;
+	max-height: 200px;
+	vertical-align: bottom;
+	}

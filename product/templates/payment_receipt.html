@@ -1,0 +1,53 @@
+<%inherit file="/home/templates/base.htm" />
+
+##This Receipt is returned after submttting payment
+<%block name="top_banner">
+	<div class="top_banner">Payment Approved</div>
+</%block>
+
+<%block name="contents">
+	   	<div class="row">
+            <div class="col-xs-12">   
+             	<img class="photo" src="${ STATIC_URL }home/media/receipt.png" alt="Receipt" >
+    		</div>
+        </div> 
+
+        <div class="text-center">
+
+        <h1>Receipt</h1>
+        <table class="table table-condensed">
+        	<tr>
+	        	<th>Currency</th>
+	        	<th>Amount</th>
+	        	<th>Date</th>
+	        	<th>Description</th>
+				<th>ID</th>
+        	</tr>
+
+        	<tr>
+	        	<td>${ resp['Currency'] }</td>
+	        	<td>${ resp['Amount'] }</td>
+	        	<td>${ resp['Date'] }</td>
+	        	<td>${ resp['Description'] }</td>
+	        	<td>${ resp['ID'] }</td>
+	        </tr>
+
+       		## <tr>
+	       	## 	<td>${ resp['Currency'] }</td>
+	       	## 	<td>${ resp['Amount'] }</td>
+	       	## 	<td>${ resp['Date'] }</td>
+	       	## 	<td>${ resp['Description'] }</td>
+	       	## 	<td>${ resp['ID'] }</td>
+	       	## </tr>
+
+
+		</table>
+
+
+
+	    <div class="text-center">
+	    <a href="/home/index/" class="btn btn-info">Home</a>
+	    </div>
+
+	
+</%block>

@@ -1,0 +1,140 @@
+.item_container {
+	display: inline-block;
+	margin: 25px;
+	padding: 5px;
+
+	border: 2px solid rgb(35, 30, 94);
+	border-radius: 4px;
+	vertical-align: middle;
+	width: 400px;
+	height: 450px;
+}
+
+.item_container > img {
+	width: 325px;
+	height: 220px;
+	margin-top: 25px;
+	vertical-align: bottom;
+	border: 5px solid rgb(35, 30, 94);
+}
+
+.events{
+	text-align: center;
+}
+/*
+.event_name{
+	margin-top: 5px;
+	font-size: 20px;
+	font-family: 
+}*/
+
+
+.event_image{
+	border: 15px solid rgb(35, 30, 94);
+	max-width: 1200px;
+	max-height: 700px;
+}
+
+.historical_figure_image{
+	width: 321px;
+}
+
+.historical_figures{
+	color: rgb(35, 30, 94);
+	background-color: none;
+	font-size: 40px;
+	width: 100%;
+	font-weight: bolder;
+	text-align: center;
+}
+
+#person_name{
+	color: rgb(164, 24, 39);
+}
+
+
+a#Bakery {
+  width: 580px;
+  margin: 100px auto 0 auto;
+  padding: 25px;
+
+}
+
+/* HOVER STYLES */
+div#Bakery {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background-color: lightgray;
+  opacity: .9;
+  color: black;
+  border: 2px solid #1a1a1a;
+  border-color: rgb(164, 24, 39);
+  font-size: 90%;
+}
+
+div#Blacksmith {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background-color: lightgray;
+  opacity: .9;
+  color: black;
+  border: 2px solid #1a1a1a;
+  border-color: rgb(164, 24, 39);
+  font-size: 90%;
+}
+
+div#Seamstress {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background-color: lightgray;
+  opacity: .9;
+  color: black;
+  border: 2px solid #1a1a1a;
+  border-color: rgb(164, 24, 39);
+  font-size: 90%;
+}
+
+div#Archery {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background-color: lightgray;
+  opacity: .9;
+  color: black;
+  border: 2px solid #1a1a1a;
+  border-color: rgb(164, 24, 39);
+  font-size: 90%;
+}
+
+div#Cooperage {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background-color: lightgray;
+  opacity: .9;
+  color: black;
+  border: 2px solid #1a1a1a;
+  border-color: rgb(164, 24, 39);
+  font-size: 90%;
+}
+
+div#Musket {
+  display: none;
+  position: absolute;
+  width: 280px;
+  padding: 10px;
+  background-color: lightgray;
+  opacity: .9;
+  color: black;
+  border: 2px solid #1a1a1a;
+  border-color: rgb(164, 24, 39);
+  font-size: 90%;
+}

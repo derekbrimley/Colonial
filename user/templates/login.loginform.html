@@ -1,0 +1,20 @@
+<%inherit file="/user/templates/base_ajax.htm" />
+
+##This is the .html that is sent to the login form modal
+
+<%block name="contents">
+	
+	<div class="text-center">
+		<img class="headertitle" src="${ STATIC_URL }home/media/colonialheritage.png" alt="The Colonial Heritage Foundation">
+	</div>
+
+		<form id="loginform" method="POST" action="/user/login.loginform/">
+			<table id="form">
+				${form}
+			</table>
+			<div class="text-center">
+				<button type="submit"  class="btn btn-success">Submit Login</button>
+			</div>
+		</form>
+
+</%block>

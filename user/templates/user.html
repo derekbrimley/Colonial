@@ -1,0 +1,135 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">User Accounts</div>
+</%block>
+
+
+
+
+<%block name="contents"> 
+	%if request.user.has_perm('home.manager'):
+
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Profile Picture</th>
+				<th>Username</th>
+				<th>First</th>
+				<th>Last</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>Zip</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+			
+			%for user in users:
+				<td><img class="profile_pic" src="${ STATIC_URL }user/media/profile_pic/pp_${user.id}.jpg" /></td>
+				<td>${user.username}</td>
+				<td>${user.first_name}</td>
+				<td>${user.last_name}</td>
+				<td>${user.email}</td>
+				<td>${user.phone}</td>
+					%for address in addresses:
+						%if user.address_id == address.id:
+							<td>${address.address1}</td>
+							<td>${address.zip}</td>
+						%endif
+					%endfor
+				<td>
+				<a href="/user/user.edit/${user.id}">Edit</a> | 
+				<a href="/user/user.delete/${user.id}">Delete</a>
+				</td>
+			</tr>
+			%endfor
+		</table>
+
+		<div class="text-right">
+			<a href="/user/user.create/" class="btn btn-success">Add a Volunteer</a>
+		</div>
+
+
+
+	%elif request.user.has_perm('home.agent'):
+
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Profile Picture</th>
+				<th>Username</th>
+				<th>First</th>
+				<th>Last</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>Zip</th>
+				<th>Actions</th>
+			</tr>
+			
+			<tr>
+			%for user in users:
+				<td><img class="profile_pic" src="${ STATIC_URL }user/media/profile_pic/pp_${user.id}.jpg" /></td>
+				<td>${user.username}</td>
+				<td>${user.first_name}</td>
+				<td>${user.last_name}</td>
+				<td>${user.email}</td>
+				<td>${user.phone}</td>
+					%for address in addresses:
+						%if user.address_id == address.id:
+							<td>${address.address1}</td>
+							<td>${address.zip}</td>
+						%endif
+					%endfor
+				<td>
+				<a href="/user/user.edit/${user.id}">Edit</a>
+				</td>
+			</tr>
+			%endfor
+		</table>
+
+
+
+	%elif request.user.is_authenticated():
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Profile Picture</th>
+				<th>Username</th>
+				<th>First</th>
+				<th>Last</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+				<td><img class="profile_pic" src="${ STATIC_URL }user/media/profile_pic/pp_${users.id}.jpg" /></td>
+				<td>${users.username}</td>
+				<td>${users.first_name}</td>
+				<td>${users.last_name}</td>
+				<td>${users.email}</td>
+				<td>${users.phone}</td>
+				<td>${addresses.address1}</td>
+				<td>${addresses.city}</td>
+				<td>${addresses.state}</td>
+				<td>${addresses.zip}</td>
+				<td>
+				<a href="/user/user.editself/${users.id}">Edit</a>
+				</td>
+			</tr>
+			
+		</table>
+
+	%else:
+
+		<h1>Not Available</h1>
+
+	%endif
+
+	
+</%block>

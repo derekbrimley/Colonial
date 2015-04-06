@@ -1,0 +1,31 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Edit Fee for Rental ${ rental.id }</div>
+</%block>
+
+
+<%block name="contents">
+
+	%if request.user.has_perm('home.agent'):
+
+		<form method="POST">
+
+			<table id="form">
+
+				${ feeform }
+
+
+			</table>
+			<div id="form_buttons">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<a href="/rental/rentals.delete/${ fee.id }/" class="btn btn-warning">Delete Fee</a>
+			</div>
+		</form>
+
+	%else:
+	<h1 class="text-center">Down for maintenance</h1>
+	%endif
+
+
+</%block>

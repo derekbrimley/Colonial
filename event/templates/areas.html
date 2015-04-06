@@ -1,0 +1,78 @@
+<%inherit file="base.htm" />
+
+
+<%block name="top_banner">
+	<div class="top_banner">Areas</div>
+</%block>
+
+
+<%block name="contents">
+
+	%if request.user.has_perm('home.manager'):
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Place Number</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+				%for area in areas:
+				<td>${area.area_name}</td>
+				<td>${area.description}</td>
+				<td>${area.place_number}</td>
+				<td>
+				<a href="/home/areas.edit/${area.id}">Edit</a> | 
+				<a href="/home/areas.delete/${area.id}">Delete</a>
+				</td>
+			</tr>
+			%endfor
+		</table>
+
+		<div class="text-right">
+			<a href="/home/areas.create/" class="btn btn-success">Add an Area</a>
+		</div>
+
+	%elif request.user.has_perm('home.agent'):
+		
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Place Number</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+				%for area in areas:
+				<td>${area.area_name}</td>
+				<td>${area.description}</td>
+				<td>${area.place_number}</td>
+				<td>
+				<a href="/home/areas.edit/${area.id}">Edit</a>
+				</td>
+			</tr>
+			%endfor
+		</table>
+
+	%else:
+		
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Place Number</th>
+			</tr>
+			<tr>
+				%for area in areas:
+				<td>${area.area_name}</td>
+				<td>${area.description}</td>
+				<td>${area.place_number}</td>
+			</tr>
+			%endfor
+		</table>
+
+	%endif
+</%block>

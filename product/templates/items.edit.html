@@ -1,0 +1,23 @@
+<%inherit file="base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Edit Inventory</div>
+</%block>
+
+
+<%block name="contents">
+
+<form method="POST">
+<table id="form">
+
+${form}
+
+</table>
+<div id="form_buttons">
+	<button type="submit" class="btn btn-primary">Submit</button>
+	<a href="/home/items.delete/${item.id}/" class="btn btn-warning">Delete Item</a>
+</div>
+</form>
+
+
+</%block>

@@ -1,0 +1,52 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Edit User Account</div>
+</%block>
+
+
+<%block name="contents">
+	%if request.user.has_perm('home.manager'):
+		<div class="text-center">
+			<img class="profile_pic" src="${ STATIC_URL }user/media/profile_pic/pp_${request.urlparams[0]}.jpg" />
+		</div>
+
+		<form method="POST">
+
+			<table id="form">
+
+				${form}
+				<span class="is_username_message"></span>
+
+
+			</table>
+			<div id="form_buttons">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<a href="/user/user.delete/${users.id}/" class="btn btn-warning">Delete Account</a>
+				<a href="/user/user.changepassword/${users.id}/" class="btn btn-info">Change Password</a>
+			</div>
+		</form>
+
+	%else:
+		<div class="text-center">
+			<img class="profile_pic" src="${ STATIC_URL }user/media/profile_pic/pp_${request.urlparams[0]}.jpg" />
+		</div>
+
+		<form method="POST">
+
+			<table id="form">
+
+				${form}
+				<span id="is_username_message"></span>
+
+			</table>
+			<div id="form_buttons">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<a href="/user/user.changepassword/${user.id}/" class="btn btn-info">Change Password</a>
+			</div>
+		</form>
+
+	%endif
+
+
+</%block>

@@ -1,0 +1,46 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Product Detail</div>
+</%block>
+
+##Code from Sprint 1
+# <%block name="contents">
+
+# <form method="POST">
+# <table id="form">
+
+# ${form}
+
+# </table>
+# <div id="form_buttons">
+# 	<button type="submit" class="btn btn-primary">Submit</button>
+# 	<a href="/home/products.delete/${product.id}/" class="btn btn-warning">Delete Item</a>
+# </div>
+# </form>
+
+
+# </%block>
+
+
+
+<%block name="contents">
+
+	##For each photo in the photographs [received from params in product.py]
+	%for photo in photographs:
+		<div class="item_container text-center">
+		%for product in products_specs:
+			%if product.id == photo.id:
+				<img src="${ STATIC_URL }product/media/products/${ photo.id}.jpg" />
+				<div class="text-muted">${ product.name }</div>
+				<div class="text-muted">${ product.price }</div>
+				<div class="text-right">
+					<button data-product_id="${ product.id }" data-photo_id="${ photo.id }" class="add_button btn btn-xs btn-warning">Add to Cart</button>
+				</div>
+			%endif
+		%endfor
+		</div>
+	%endfor
+
+
+</%block>

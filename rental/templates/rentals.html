@@ -1,0 +1,45 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Rental Home</div>
+	
+</%block>
+
+
+
+<%block name="contents">
+%if request.user.has_perm('home.agent'):
+	<div="row">
+
+	 	<div class="col-md-6 item_container text-center">
+	  		<img src="${ STATIC_URL }rental/media/icons/view.jpg" />
+			<div class="text-center">                                                                                           
+				<a href="/rental/rentals.view/" class="btn btn-success btn-lg" role="button"><h2>View Rentals</h2></a>
+			</div>
+		</div>
+	                                                       
+
+		## <div class="col-md-4 item_container text-center">
+		## 	<img src="${ STATIC_URL }rental/media/icons/edit.jpg" />
+		## 	<div class="text-center">
+		## 		<a href="/rental/rentals.edit/${ user.id}"><h1>Edit</h1></a>
+		## 	</div>
+		## </div>
+
+
+	  	<div class="col-md-6 item_container text-center">
+			<img src="${ STATIC_URL }rental/media/icons/add.jpg" />
+	  		<div class="text-center">
+	  			<a href="/rental/rentals.add_customer/" class="btn btn-success btn-lg" role="button"><h2>Build Rental</h2></a>
+			</div>
+	  	</div>
+
+	</div>
+
+%else:
+
+	<h1 class="text-center">Down for maintenance</h1>
+
+%endif
+
+</%block>

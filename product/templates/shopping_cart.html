@@ -1,0 +1,53 @@
+<%inherit file="/user/templates/base_ajax.htm" />
+
+##  params from shopping_cart.py def process_request
+##      'cart' : cart,
+##      'cart_list': cart_list,
+##      'photos': photos,
+##      'total_price': total_price
+##  
+
+
+<%block name="contents">
+
+<div class="text-center">
+	<img class="headertitle" height="100" src="${ STATIC_URL }home/media/colonialheritage.png" alt="The Colonial Heritage Foundation">
+</div>
+
+
+##JohnCode
+<table class="table">
+
+	%for product in cart_list:
+		%for photo in photos:
+		    %if photo.id == product.id:
+				<tr>
+					<td>
+			        <img class="image" src="${ STATIC_URL }product/media/products/${ photo.id }.jpg" />
+			        </td>
+			       	<td>${product.name}</td>
+			        <td>Quantity: ${cart[str(product.id)]}</td>
+			        <td><a data-product_id="${ product.id }" class="delete_button btn btn-danger btn-xs" role="button">Delete</a></td>
+			    </tr>
+		   	%endif
+		%endfor
+	%endfor
+
+</table>
+<div class="text-center">
+<h3 class="total_price">TOTAL: $${total_price}</h3>
+</div>
+
+##Check to see if they are logged in or not. Only check out if logged in
+%if request.user.is_authenticated():
+	<div class="text-center">
+    <td><a href="/product/shopping_cart.checkout/${total_price}/${ request.user.id }" class="checkout_button btn btn-warning btn" role="button">Check Out</a></td>
+    </div>
+%else:
+	<div class="text-center">
+        <button class="show_login_dialog btn btn-primary">Sign In</button>
+   	</div>
+%endif
+
+
+</%block>

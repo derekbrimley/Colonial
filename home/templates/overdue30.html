@@ -1,0 +1,71 @@
+<%inherit file="/home/templates/base_ajax.htm" />
+
+
+<%block name="contents">
+
+<br>
+
+   ##These are the params that were passed to this page
+		## params = {
+		## 'overdue' : overdue30,
+		## 'customers' : customers,
+		## 'product_specs' : product_specs,
+		## }
+
+		<table id="display_table" class="table table-striped table-bordered">
+			<tr>
+				<th>Rental ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Price</th>
+				<th>Date Rented</th>
+				<th>Date Due</th>
+				<th>Product</th>
+			</tr>
+
+				<tr>
+					%for rental in overdue30:
+						%for transaction in transactions:
+							%if rental.transaction_id == transaction.id:
+								<td>${rental.id}</td>
+
+								%for user in users:
+									%if transaction.customer_id == user.id:
+										<td>${user.first_name} ${user.last_name}</td>
+										<td>${user.email}</td>
+									%endif
+								%endfor
+
+								<td>${rental.price}</td>
+								<td>${rental.date_out}</td>
+								<td>${rental.date_due}</td>
+
+
+								%for product in products:
+									%if product.id == rental.rentable_product_id:
+										<td>${product.name}</td>
+									%endif
+								%endfor
+							%endif
+						%endfor
+
+
+					</tr>
+					%endfor
+			</table>
+
+			<div class="text-center">
+				<a href="/rental/rentals/" class="btn btn btn-primary ">Back</a>
+				<a href="/rental/rentals.add_customer/" class="btn btn btn-success">Add New Rental</a>
+			</div>
+		
+
+	##	##If there are no rentals
+	##	%else:
+	##		<div class="text-center" >
+	##			<h3>No Overdue Rentals!</h3>
+	##		</div>
+	##	%endif
+
+
+</%block>

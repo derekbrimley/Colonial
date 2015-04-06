@@ -1,0 +1,75 @@
+<%inherit file="/home/templates/base_ajax.htm" />
+
+
+<%block name="contents">
+
+<br>
+
+   ##These are the params that were passed to this page
+		## params = {
+		## 'overdue' : overdue30/60/90,
+		## 'customers' : customers,
+		## 'product_specs' : product_specs,
+		## 'transactions' : transactions,
+
+		%if overdue:
+		<table id="display_table" class="table table-striped table-bordered">
+			<tr>
+				<th>Rental ID</th>
+				##<th>Transaction ID</th>
+				<th>Price</th>
+				<th>Date Rented</th>
+				<th>Date Due</th>
+				##<th>Customer</th>
+				##<th>Email</th>
+				<th>Product</th>
+				
+			</tr>
+
+				<tr>
+					##%for transaction in transactions:
+						%for rental in overdue:
+							##%if rental.transaction_id == transaction.id:
+								<td>${rental.id}</td>
+								##<td>${transaction.id}</td>
+								<td>${rental.price}</td>
+								<td>${rental.date_out}</td>
+								<td>${rental.date_due}</td>
+								
+								##%for customer in customers:
+								##	%if transaction.customer_id == customer.id:
+								##		<td>${customer.first_name} ${customer.last_name}</td>
+								##		<td>${customer.email}</td>
+								##	%endif
+								##%endfor
+								
+								%for product in product_specs:
+									%if rental.rentable_product_id == product.id:
+										<td>${product.name}</td>
+									%endif
+								%endfor
+								</tr>
+								</tr>
+							##%endif
+						</tr>
+						%endfor
+
+					##%endfor
+
+					
+			</table>
+
+			<div class="text-center">
+				<a href="/home/overdue_items/" class="btn btn btn-primary ">Reset</a>
+			</div>
+		
+
+		##If there are no rentals
+		%else:
+			<div class="text-center" >
+				<h3>Email Notifcations are sending.</h3>
+			</div>
+		%endif
+
+
+</%block>

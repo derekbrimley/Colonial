@@ -1,0 +1,46 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="title">
+	<title>Colonial Products</title>
+	<meta name="Colonial Heritage Foundation Home Page" content="The Colonial Heritage Foundation promotes actively engaging the mind in history. TPurchase colonial products on this page for discounted prices.">
+</%block>
+
+<%block name="top_banner">
+	<div class="top_banner">Products</div>
+</%block>
+
+
+
+<%block name="contents">
+
+<div class="search">
+	<label for="search_input">Search Product:</label>
+    <input id="search_input" type="text">
+</div>
+<div class="products">
+
+    ##These are the params that were passed to this page
+	##params['photographs'] = photographs
+	##params['products'] = products
+
+	##For each photo in the photographs [received from params in product.py]
+	
+		
+		%for product in products:
+		<div class="item_container text-center">
+		%for photo in photographs:
+			%if product.id == photo.id:
+				<img src="${ STATIC_URL }product/media/products/${ photo.id}.jpg" />
+				<div class="text-muted">${ product.name }</div>
+				<div class="text-muted">${ product.price }</div>
+				<div class="text-right">
+					<a href="/product/products.detail/${ product.id }/${ photo.id }" data-product_id="${ product.id }" data-photo_id="${ photo.id }" class="show_detail btn btn-xs btn-primary">Show Detail</a>
+
+				</div>
+			%endif
+		%endfor
+		</div>
+	%endfor
+
+</div>
+</%block>

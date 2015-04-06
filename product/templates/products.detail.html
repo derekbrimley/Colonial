@@ -1,0 +1,79 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">${ product.name }</div>
+</%block>
+
+
+<%block name="contents">
+	##Params pass to this page from products.py @def detail
+	##params['product'] = product
+	##params['photo'] = photo
+
+	 ##For each photo in the photographs [received from params in product.py]
+	 	<div class="text-center">
+	 	<div class="item_container">
+	  			<img id="product_image" src="${ STATIC_URL }product/media/products/${ photo.id}.jpg" />
+	  			<div class="text-muted">${ product.name }</div>
+	  			<div class="text-muted">${ product.price }</div>
+	  			<br />
+	  			<div class="product_dropdown selectpicker" "text-center">
+  			        Qty:
+  			        <select>
+  			            <option value="1">1</option>
+  			            <option value="2">2</option>
+  			            <option value="3">3</option>
+  			            <option value="4">4</option>
+  			            <option value="5">5</option>
+  			        </select>
+	 				<button data-product_id="${ product.id }" data-photo_id="${ photo.id }" class="add_button btn btn btn-warning">Add to Cart</button>
+	 			</div>
+	 	</div>
+	 	</div>
+	 
+	##Display table with details
+	<h3>${ product.name } Details</h3>
+	<table id="display_table" class="table table-striped table-bordered">	
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Avg Price</th>
+			<th>Manufacturer</th>
+		</tr>
+		<tr>
+			<td>${product.name}</td>
+			<td>${product.description}</td>
+			<td>${product.price}</td>
+			<td>${product.average_cost}</td>
+			<td>${product.manufacturer}</td>
+		</tr>
+	</table>
+
+	<div class="text-left">
+		<a href="/product/products/" class="btn btn btn-primary">Back</a>
+	</div>
+
+</%block>
+
+
+
+
+
+##Code from Sprint 1
+## <%block name="contents">
+#
+## <form method="POST">
+## <table id="form">
+#
+## ${form}
+#
+## </table>
+## <div id="form_buttons">
+## 	<button type="submit" class="btn btn-primary">Submit</button>
+## 	<a href="/home/products.delete/${product.id}/" class="btn btn-warning">Delete Item</a>
+## </div>
+## </form>
+#
+#
+## </%block>

@@ -1,0 +1,34 @@
+<%inherit file="/user/templates/base_ajax.htm" />
+
+
+## <%block name="top_banner">
+## 	<div class="top_banner">Get on your Colonial horse and ride along!</div>
+## </%block>
+
+
+<%block name="contents">
+	
+	<div class="text-center">
+		<img class="headertitle" src="${ STATIC_URL }home/media/colonialheritage.png" alt="The Colonial Heritage Foundation">
+	</div>
+
+	<div class="top_banner">Get on your Colonial horse and ride along!</div>
+
+		<form id="joinform" method="POST" action="/user/join.joinform/">
+
+			<table id="join_form">
+
+				${form}
+				<span class="is_username_message"></span>
+
+			</table>
+
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary">Join!</button>
+			</div>
+
+		</form>
+
+	</div>
+
+</%block>

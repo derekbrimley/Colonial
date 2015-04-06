@@ -1,0 +1,24 @@
+<%inherit file="base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Edit Events</div>
+</%block>
+
+
+<%block name="contents">
+
+<form method="POST">
+<table id="form">
+
+${form}
+
+</table>
+<div id="form_buttons">
+	<button type="submit" class="btn btn-primary">Submit</button>
+	<a href="/home/events.delete/${event.id}/" class="btn btn-warning">Delete Area</a>
+</div>
+
+</form>
+
+
+</%block>

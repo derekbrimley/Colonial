@@ -1,0 +1,122 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Complete Rental</div>
+	<div class="text-center"><h4>Almost finished</h4></div>
+	<br>
+</%block>
+
+
+
+##  params from rentals.py def rentalcart_build
+ 		##'cart' : cart,
+        ##'cart_list': cart_list,
+        ##'photos': photos,
+        ##'transaction_id': transaction_id,
+        ## rentalform
+
+
+
+<%block name="contents">
+<form method="POST">
+
+	<table class="table table-striped">
+
+		${ rentalform }
+
+	</table>
+
+	<div class="text-center">
+		<h3 class="total_price">Daily Fee: $${dailyfee}</h3>
+	</div>
+	<div id="form_buttons">
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>
+</form>
+
+</%block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%block name="content">
+
+
+##JohnCode
+	<table class="table table-striped">
+
+		%for product in products_as_string:
+
+			%for photo in photos_as_string:
+
+			 	%if photo == product:
+			 		
+					<tr>
+								##<td><h1>${product.name}</h1></td>
+						<td>
+				        	<img class="image" src="${ STATIC_URL }product/media/products/${ photo }.jpg" />
+				        </td>
+
+				       	<td>
+				       		%for form in forms:
+				       			%for field in form:
+				       				%if field.label == "Rentable Product":
+				       					%for value in field:
+				       						%if value.value == product:
+				       							${form}
+				       						%endif
+				       					%endfor
+				       				%endif
+						      	%endfor
+				       		%endfor
+				       	</td>
+
+				    </tr>
+
+				%endif
+			%endfor
+		%endfor
+
+	</table>
+
+	## <table id="form">
+	## 	${form}
+	## </table>
+
+##Check to see if they are logged in or not. Only check out if logged in
+%if request.user.is_authenticated():
+	<div id="form_buttons">
+	<button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+%else:
+	<div id="form_buttons">
+        <button class="show_login_dialog btn btn-primary">Sign In</button>
+   	</div>
+%endif
+
+
+</%block>

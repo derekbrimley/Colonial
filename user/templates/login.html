@@ -1,0 +1,47 @@
+##<%inherit file="/home/templates/base.htm" />
+<h1>Login form is offline</h1>
+##
+##
+##
+##<%block name="top_banner">
+##	<div class="top_banner">Login</div>
+##</%block>
+##
+##<%block name="contents">
+##	
+####For the form
+##	## <div id="loginform_container" >
+##	## 	<form id="loginform" method="POST" action="/user/login.loginform/">
+##	## 		<table id="form">
+##	## 			${form}
+##	## 		</table>
+##	## 		<div id="form_buttons">
+##	## 			<button type="submit" class="btn btn-success">Login</button>
+##	## 		</div>
+##	## 	</form>
+##	## </div>
+##
+##
+##	<button class="show_login_dialog btn btn-success">Login Here</button>
+##
+####Using Load modal instead
+##	## <!-- Modal -->
+##	## <div class="modal fade" id="login_dialog" tabindex="-1" role="dialog" aria-##labelledby="myModalLabel" aria-#hidden="true">
+##	##   <div class="modal-dialog">
+##	##     <div class="modal-content">
+##	##       <div class="modal-header">
+##	##         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><##span aria-hidden="true">#&times;</span></button>
+##	##         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+##	##       </div>
+##	##       <div class="modal-body">
+##	##         Login Form
+##	##       </div>
+##	##       <div class="modal-footer">
+##	##         <button type="button" class="btn btn-default" data-dismiss="modal">Close<##/button>
+##	##         <button type="button" class="btn btn-primary">Save changes</button>
+##	##       </div>
+##	##     </div>
+##	##   </div>
+##	## </div>
+##
+##</%block>

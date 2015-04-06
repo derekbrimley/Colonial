@@ -1,0 +1,109 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="title">
+	<title>Colonial Events</title>
+	<meta name="Colonial Heritage Foundation Home Page" content="The Colonial Heritage Foundation promotes actively engaging the mind in history. This page will show you the many different colonial events going on! Fun around every corner. Family and Friends are all welcome.">
+</%block>
+
+<%block name="top_banner">
+	<div class="top_banner">Events</div>
+</%block>
+
+
+
+<%block name="contents">
+	## This If and Else will show different tables based on if someone is logged in or not
+
+	%if request.user.has_perm('home.is_manager'):
+
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Map File</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+				%for event in events:
+				<td>${event.name}</td>
+				<td>${event.description}</td>
+				<td>${event.start_date}</td>
+				<td>${event.end_date}</td>
+				<td>${event.map_file}</td>
+				<td>
+				<a href="/home/events.edit/${event.id}">Edit</a> | 
+				<a href="/home/events.delete/${event.id}">Delete</a>
+				</td>
+			</tr>
+			%endfor
+		</table>
+
+		<div class="text-right">
+			<a href="/home/events.create/" class="btn btn-success">Add an Event</a>
+		</div>
+	  
+	%elif request.user.has_perm('home.is_agent'):
+
+		<table id="display_table" class="table table-striped table-bordered">
+			
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Map File</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+				%for event in events:
+				<td>${event.name}</td>
+				<td>${event.description}</td>
+				<td>${event.start_date}</td>
+				<td>${event.end_date}</td>
+				<td>${event.map_file}</td>
+				<td>
+				<a href="/home/events.edit/${event.id}">Edit</a>
+				</td>
+			</tr>
+			%endfor
+		</table>
+
+	%else:
+
+	<div class="events">
+
+	    ##These are the params that were passed to this page
+	    ##params['photos'] = photos * only has the photos with "events" in title
+		##params['events'] = events
+		##u.name
+		##u.description
+		##u.start_date
+		##u.end_date
+		##u.map_file
+		##u.venue_name
+		##u.address_id
+				
+			%for event in events:
+				<div class="item_container text-center">
+					%for photo in photos:
+						%if str(event.id) in photo.image:
+							<img src="${ STATIC_URL }event/media/${ photo.image }" />
+							<div class="event_name"><h1>${ event.name }</h1></div>
+							<div class="text-muted"><h1><small>${ event.description }</small></h1></div>
+							<div class="text-center">
+								<a href="/event/events.detail/${ event.id }/${ photo.id }" data-event_id="${ event.id }" data-photo_id="${ photo.id }" class="show_detail btn btn-lg btn-primary">More Info!</a>
+
+							</div>
+						%endif
+					%endfor
+				</div>
+			%endfor
+	</div>
+		
+		
+	%endif	
+</%block>
+
