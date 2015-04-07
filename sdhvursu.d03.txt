@@ -1,0 +1,73 @@
+﻿Merge remote-tracking branch 'origin/development' into development
+
+Conflicts:
+	colonial/__pycache__/__init__.cpython-34.pyc
+	colonial/__pycache__/settings.cpython-34.pyc
+	event/__pycache__/__init__.cpython-34.pyc
+	event/__pycache__/models.cpython-34.pyc
+	home/__pycache__/__init__.cpython-34.pyc
+	home/__pycache__/models.cpython-34.pyc
+	product/__pycache__/__init__.cpython-34.pyc
+	product/__pycache__/models.cpython-34.pyc
+	rental/__pycache__/__init__.cpython-34.pyc
+	rental/__pycache__/models.cpython-34.pyc
+	user/__pycache__/__init__.cpython-34.pyc
+	user/__pycache__/models.cpython-34.pyc
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch development
+# Your branch and 'origin/development' have diverged,
+# and have 1 and 11 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	deleted:    Rubric-Sprint 3v1.xlsx
+#	modified:   colonial/__pycache__/urls.cpython-34.pyc
+#	modified:   colonial/__pycache__/wsgi.cpython-34.pyc
+#	modified:   home/cached_templates/templates/__pycache__/base.cpython-34.pyc
+#	modified:   home/cached_templates/templates/__pycache__/index.cpython-34.pyc
+#	modified:   home/media/colonialman.jpg
+#	modified:   home/styles/base.css
+#	modified:   home/templates/base.htm
+#	modified:   product/cached_templates/templates/__pycache__/product.cpython-34.pyc
+#	modified:   product/cached_templates/templates/__pycache__/products.cpython-34.pyc
+#	modified:   product/cached_templates/templates/home/templates/__pycache__/base.cpython-34.pyc
+#	modified:   product/cached_templates/templates/home/templates/__pycache__/base_ajax.cpython-34.pyc
+#	modified:   product/cached_templates/templates/home/templates/base.htm.py
+#	modified:   product/scripts/products.js
+#	modified:   product/views/__pycache__/__init__.cpython-34.pyc
+#	modified:   product/views/__pycache__/products.cpython-34.pyc
+#	modified:   product/views/products.py
+#	new file:   rental/cached_templates/templates/__pycache__/base.cpython-34.pyc
+#	new file:   rental/cached_templates/templates/__pycache__/bulk_rentals.cpython-34.pyc
+#	new file:   rental/cached_templates/templates/__pycache__/bulk_rentals_ajax.cpython-34.pyc
+#	modified:   rental/cached_templates/templates/__pycache__/rentals.cpython-34.pyc
+#	new file:   rental/cached_templates/templates/base.htm.py
+#	new file:   rental/cached_templates/templates/bulk_rentals.html.py
+#	new file:   rental/cached_templates/templates/bulk_rentals_ajax.html.py
+#	modified:   rental/cached_templates/templates/home/templates/__pycache__/base.cpython-34.pyc
+#	new file:   rental/cached_templates/templates/home/templates/__pycache__/base_ajax.cpython-34.pyc
+#	modified:   rental/cached_templates/templates/home/templates/base.htm.py
+#	new file:   rental/cached_templates/templates/home/templates/base_ajax.htm.py
+#	modified:   rental/cached_templates/templates/rentals.view.html.py
+#	new file:   rental/scripts/rentals.view.js
+#	modified:   rental/templates/rentals.view.html
+#	modified:   rental/views/__pycache__/__init__.cpython-34.pyc
+#	modified:   rental/views/__pycache__/rentals.cpython-34.pyc
+#	modified:   rental/views/rentals.py
+#	modified:   user/cached_templates/templates/__pycache__/login.cpython-34.pyc
+#	modified:   user/cached_templates/templates/user/templates/__pycache__/base_ajax.cpython-34.pyc
+#	modified:   user/views/__pycache__/__init__.cpython-34.pyc
+#	modified:   user/views/__pycache__/login.cpython-34.pyc
+#
+

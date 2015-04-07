@@ -1,0 +1,22 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch development
+# Your branch is behind 'origin/development' by 11 commits, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# Changes to be committed:
+#	modified:   colonial/__pycache__/__init__.cpython-34.pyc
+#	modified:   colonial/__pycache__/settings.cpython-34.pyc
+#	modified:   event/__pycache__/__init__.cpython-34.pyc
+#	modified:   event/__pycache__/models.cpython-34.pyc
+#	modified:   home/__pycache__/__init__.cpython-34.pyc
+#	modified:   home/__pycache__/models.cpython-34.pyc
+#	modified:   product/__pycache__/__init__.cpython-34.pyc
+#	modified:   product/__pycache__/models.cpython-34.pyc
+#	modified:   rental/__pycache__/__init__.cpython-34.pyc
+#	modified:   rental/__pycache__/models.cpython-34.pyc
+#	modified:   user/__pycache__/__init__.cpython-34.pyc
+#	modified:   user/__pycache__/models.cpython-34.pyc
+#
+
