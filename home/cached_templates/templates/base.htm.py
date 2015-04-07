@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428091187.927
+_modified_time = 1428376450.11953
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\home\\templates/base.htm'
+_template_filename = 'C:\\Python34\\Projects\\Colonial\\home\\templates/base.htm'
 _template_uri = 'base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['title', 'contents', 'top_banner']
+_exports = ['title', 'top_banner', 'contents']
 
 
 from django_mako_plus.controller import static_files 
@@ -19,16 +19,16 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        user = context.get('user', UNDEFINED)
-        request = context.get('request', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        def top_banner():
-            return render_top_banner(context._locals(__M_locals))
         self = context.get('self', UNDEFINED)
         def title():
             return render_title(context._locals(__M_locals))
         def contents():
             return render_contents(context._locals(__M_locals))
+        user = context.get('user', UNDEFINED)
+        def top_banner():
+            return render_top_banner(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n')
         __M_writer('\r\n')
@@ -100,6 +100,18 @@ def render_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_top_banner(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def top_banner():
+            return render_top_banner(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n            <div class="top_banner">Welcome to the Colonial Heritage Foundation</div>\r\n          ')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -115,20 +127,8 @@ def render_contents(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_top_banner(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def top_banner():
-            return render_top_banner(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n            <div class="top_banner">Welcome to the Colonial Heritage Foundation</div>\r\n          ')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 """
 __M_BEGIN_METADATA
-{"uri": "base.htm", "source_encoding": "ascii", "filename": "C:\\Python34\\Projects\\colonial\\home\\templates/base.htm", "line_map": {"130": 124, "16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "44": 15, "45": 18, "46": 23, "47": 23, "48": 24, "49": 24, "50": 28, "51": 28, "52": 28, "53": 33, "54": 33, "55": 37, "56": 38, "57": 39, "58": 39, "59": 43, "60": 44, "61": 52, "62": 56, "63": 56, "64": 64, "65": 64, "66": 73, "67": 74, "68": 88, "69": 89, "70": 103, "71": 104, "72": 118, "77": 133, "82": 141, "83": 170, "84": 170, "85": 170, "91": 12, "97": 12, "103": 139, "110": 139, "111": 140, "112": 140, "118": 131, "124": 131}}
+{"uri": "base.htm", "filename": "C:\\Python34\\Projects\\Colonial\\home\\templates/base.htm", "line_map": {"130": 124, "16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "44": 15, "45": 18, "46": 23, "47": 23, "48": 24, "49": 24, "50": 28, "51": 28, "52": 28, "53": 33, "54": 33, "55": 37, "56": 38, "57": 39, "58": 39, "59": 43, "60": 44, "61": 52, "62": 56, "63": 56, "64": 64, "65": 64, "66": 73, "67": 74, "68": 88, "69": 89, "70": 103, "71": 104, "72": 118, "77": 133, "82": 141, "83": 170, "84": 170, "85": 170, "91": 12, "97": 12, "103": 131, "109": 131, "115": 139, "122": 139, "123": 140, "124": 140}, "source_encoding": "ascii"}
 __M_END_METADATA
 """
