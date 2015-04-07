@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427871474.380668
+_modified_time = 1428376714.270478
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\user\\templates/user.edit.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/user.edit.html'
 _template_uri = 'user.edit.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['top_banner', 'contents']
+_exports = ['contents', 'top_banner']
 
 
 def _mako_get_namespace(context, name):
@@ -28,15 +28,15 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def top_banner():
-            return render_top_banner(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
-        form = context.get('form', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
-        user = context.get('user', UNDEFINED)
-        users = context.get('users', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
+        users = context.get('users', UNDEFINED)
+        form = context.get('form', UNDEFINED)
+        user = context.get('user', UNDEFINED)
+        def top_banner():
+            return render_top_banner(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'top_banner'):
@@ -53,28 +53,16 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_top_banner(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def top_banner():
-            return render_top_banner(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n\t<div class="top_banner">Edit User Account</div>\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        form = context.get('form', UNDEFINED)
-        request = context.get('request', UNDEFINED)
         def contents():
             return render_contents(context)
-        user = context.get('user', UNDEFINED)
-        users = context.get('users', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
+        users = context.get('users', UNDEFINED)
+        form = context.get('form', UNDEFINED)
+        user = context.get('user', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n')
         if request.user.has_perm('home.manager'):
@@ -105,8 +93,20 @@ def render_contents(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_top_banner(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def top_banner():
+            return render_top_banner(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n\t<div class="top_banner">Edit User Account</div>\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Python34\\Projects\\colonial\\user\\templates/user.edit.html", "line_map": {"68": 8, "79": 8, "80": 9, "81": 10, "82": 11, "83": 11, "84": 11, "85": 11, "86": 18, "87": 18, "88": 25, "89": 25, "90": 26, "91": 26, "92": 30, "93": 31, "94": 32, "95": 32, "96": 32, "97": 32, "98": 39, "27": 0, "100": 45, "101": 45, "102": 50, "41": 1, "108": 102, "46": 5, "99": 39, "56": 3, "62": 3}, "uri": "user.edit.html", "source_encoding": "ascii"}
+{"uri": "user.edit.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/user.edit.html", "source_encoding": "ascii", "line_map": {"67": 8, "68": 9, "69": 10, "70": 11, "71": 11, "72": 11, "73": 11, "74": 18, "75": 18, "76": 25, "77": 25, "78": 26, "79": 26, "80": 30, "81": 31, "82": 32, "83": 32, "84": 32, "85": 32, "86": 39, "87": 39, "88": 45, "89": 45, "90": 50, "27": 0, "96": 3, "102": 3, "41": 1, "108": 102, "46": 5, "56": 8}}
 __M_END_METADATA
 """

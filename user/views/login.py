@@ -93,6 +93,7 @@ def loginform(request):
 						u.last_login = str(datetime.now())
 						u.address_id = 1
 						u.save()
+						print("LDAP3 CREATED, SAVED")
 
 					print(">>>>LDAP-Complete")
 
@@ -107,7 +108,9 @@ def loginform(request):
 			except: #Log in just on website
 				print(">>>LDAP-Abort")
 				try:
-					user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+					user = authenticate(username=username, password=sauce)
+					print("USERNAME: ",username)
+					print("PASSWORD: ",sauce)
 					if user == None:
 						print("Invalid Credentials")
 						raise forms.ValidationError('Invalid Credentials')

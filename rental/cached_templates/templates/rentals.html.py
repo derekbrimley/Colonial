@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428089090.992541
+_modified_time = 1428377082.901034
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\rental\\templates/rentals.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\rental\\templates/rentals.html'
 _template_uri = 'rentals.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -28,10 +28,10 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        request = context.get('request', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         def top_banner():
             return render_top_banner(context._locals(__M_locals))
         __M_writer = context.writer()
@@ -53,10 +53,10 @@ def render_body(context,**pageargs):
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        request = context.get('request', UNDEFINED)
         def contents():
             return render_contents(context)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n')
         if request.user.has_perm('home.agent'):
@@ -88,6 +88,6 @@ def render_top_banner(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "rentals.html", "filename": "C:\\Python34\\Projects\\colonial\\rental\\templates/rentals.html", "source_encoding": "ascii", "line_map": {"64": 15, "65": 15, "66": 28, "67": 31, "68": 31, "69": 39, "38": 1, "71": 44, "43": 6, "77": 3, "83": 3, "53": 10, "89": 83, "27": 0, "70": 40, "61": 10, "62": 11, "63": 12}}
+{"uri": "rentals.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\rental\\templates/rentals.html", "source_encoding": "ascii", "line_map": {"64": 15, "65": 15, "66": 28, "67": 31, "68": 31, "69": 39, "38": 1, "71": 44, "43": 6, "77": 3, "83": 3, "53": 10, "89": 83, "27": 0, "70": 40, "61": 10, "62": 11, "63": 12}}
 __M_END_METADATA
 """

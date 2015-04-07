@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428078253.19887
+_modified_time = 1428377585.754257
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\event\\templates/events.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\event\\templates/events.html'
 _template_uri = 'events.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['title', 'top_banner', 'contents']
+_exports = ['contents', 'title', 'top_banner']
 
 
 def _mako_get_namespace(context, name):
@@ -28,17 +28,17 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        events = context.get('events', UNDEFINED)
+        str = context.get('str', UNDEFINED)
+        def contents():
+            return render_contents(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
+        photos = context.get('photos', UNDEFINED)
         def title():
             return render_title(context._locals(__M_locals))
         def top_banner():
             return render_top_banner(context._locals(__M_locals))
-        str = context.get('str', UNDEFINED)
-        request = context.get('request', UNDEFINED)
-        photos = context.get('photos', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        events = context.get('events', UNDEFINED)
-        def contents():
-            return render_contents(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'title'):
@@ -61,44 +61,20 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_title(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def title():
-            return render_title(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n\t<title>Colonial Events</title>\r\n\t<meta name="Colonial Heritage Foundation Home Page" content="The Colonial Heritage Foundation promotes actively engaging the mind in history. This page will show you the many different colonial events going on! Fun around every corner. Family and Friends are all welcome.">\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_top_banner(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def top_banner():
-            return render_top_banner(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n\t<div class="top_banner">Events</div>\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        str = context.get('str', UNDEFINED)
-        request = context.get('request', UNDEFINED)
-        photos = context.get('photos', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         events = context.get('events', UNDEFINED)
+        str = context.get('str', UNDEFINED)
         def contents():
             return render_contents(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
+        photos = context.get('photos', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n')
         __M_writer('\r\n')
-        if request.user.has_perm('home.is_manager'):
+        if request.user.has_perm('home.manager'):
             __M_writer('\r\n\t\t<table id="display_table" class="table table-striped table-bordered">\r\n\t\t\t\r\n\t\t\t<tr>\r\n\t\t\t\t<th>Name</th>\r\n\t\t\t\t<th>Description</th>\r\n\t\t\t\t<th>Start Date</th>\r\n\t\t\t\t<th>End Date</th>\r\n\t\t\t\t<th>Map File</th>\r\n\t\t\t\t<th>Actions</th>\r\n\t\t\t</tr>\r\n\t\t\t<tr>\r\n')
             for event in events:
                 __M_writer('\t\t\t\t<td>')
@@ -165,8 +141,32 @@ def render_contents(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_title(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def title():
+            return render_title(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n\t<title>Colonial Events</title>\r\n\t<meta name="Colonial Heritage Foundation Home Page" content="The Colonial Heritage Foundation promotes actively engaging the mind in history. This page will show you the many different colonial events going on! Fun around every corner. Family and Friends are all welcome.">\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_top_banner(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def top_banner():
+            return render_top_banner(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n\t<div class="top_banner">Events</div>\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "uri": "events.html", "filename": "C:\\Python34\\Projects\\colonial\\event\\templates/events.html", "line_map": {"128": 64, "129": 64, "130": 65, "131": 65, "132": 66, "133": 66, "134": 68, "135": 68, "136": 72, "137": 74, "138": 75, "139": 88, "140": 89, "141": 90, "142": 91, "143": 92, "144": 93, "145": 93, "146": 93, "147": 93, "148": 93, "149": 94, "150": 94, "151": 95, "152": 95, "153": 97, "154": 97, "27": 0, "156": 97, "157": 97, "158": 97, "159": 97, "160": 97, "161": 102, "162": 104, "155": 97, "168": 162, "43": 1, "48": 6, "53": 10, "58": 108, "64": 3, "70": 3, "76": 8, "82": 8, "88": 14, "99": 14, "100": 16, "101": 17, "102": 18, "103": 30, "104": 31, "105": 31, "106": 31, "107": 32, "108": 32, "109": 33, "110": 33, "111": 34, "112": 34, "113": 35, "114": 35, "115": 37, "116": 37, "117": 38, "118": 38, "119": 42, "120": 48, "121": 49, "122": 61, "123": 62, "124": 62, "125": 62, "126": 63, "127": 63}}
+{"uri": "events.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\event\\templates/events.html", "source_encoding": "ascii", "line_map": {"128": 95, "129": 97, "130": 97, "131": 97, "132": 97, "133": 97, "134": 97, "135": 97, "136": 97, "137": 102, "138": 104, "144": 3, "150": 3, "27": 0, "156": 8, "162": 8, "168": 162, "43": 1, "48": 6, "53": 10, "58": 108, "64": 14, "75": 14, "76": 16, "77": 17, "78": 18, "79": 30, "80": 31, "81": 31, "82": 31, "83": 32, "84": 32, "85": 33, "86": 33, "87": 34, "88": 34, "89": 35, "90": 35, "91": 37, "92": 37, "93": 38, "94": 38, "95": 42, "96": 48, "97": 49, "98": 61, "99": 62, "100": 62, "101": 62, "102": 63, "103": 63, "104": 64, "105": 64, "106": 65, "107": 65, "108": 66, "109": 66, "110": 68, "111": 68, "112": 72, "113": 74, "114": 75, "115": 88, "116": 89, "117": 90, "118": 91, "119": 92, "120": 93, "121": 93, "122": 93, "123": 93, "124": 93, "125": 94, "126": 94, "127": 95}}
 __M_END_METADATA
 """

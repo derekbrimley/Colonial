@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428055054.688952
+_modified_time = 1428377078.5394
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\home\\templates/about.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/about.html'
 _template_uri = 'about.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -99,6 +99,6 @@ def render_top_banner(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"66": 14, "67": 19, "68": 19, "69": 37, "70": 37, "39": 1, "44": 6, "76": 3, "27": 0, "49": 10, "82": 3, "88": 8, "100": 94, "59": 14, "94": 8}, "filename": "C:\\Python34\\Projects\\colonial\\home\\templates/about.html", "uri": "about.html", "source_encoding": "ascii"}
+{"uri": "about.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/about.html", "source_encoding": "ascii", "line_map": {"66": 14, "67": 19, "68": 19, "69": 37, "70": 37, "39": 1, "44": 6, "76": 3, "27": 0, "49": 10, "82": 3, "88": 8, "100": 94, "59": 14, "94": 8}}
 __M_END_METADATA
 """

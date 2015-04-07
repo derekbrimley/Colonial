@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427834424.221909
+_modified_time = 1428376707.789184
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\user\\templates/user.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/user.html'
 _template_uri = 'user.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -28,12 +28,12 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        addresses = context.get('addresses', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        users = context.get('users', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         request = context.get('request', UNDEFINED)
+        users = context.get('users', UNDEFINED)
+        addresses = context.get('addresses', UNDEFINED)
         def top_banner():
             return render_top_banner(context._locals(__M_locals))
         __M_writer = context.writer()
@@ -55,12 +55,12 @@ def render_body(context,**pageargs):
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        users = context.get('users', UNDEFINED)
         def contents():
             return render_contents(context)
-        request = context.get('request', UNDEFINED)
-        addresses = context.get('addresses', UNDEFINED)
+        users = context.get('users', UNDEFINED)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        addresses = context.get('addresses', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer(' \r\n')
         if request.user.has_perm('home.manager'):
@@ -171,6 +171,6 @@ def render_top_banner(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "user.html", "filename": "C:\\Python34\\Projects\\colonial\\user\\templates/user.html", "source_encoding": "ascii", "line_map": {"27": 0, "40": 1, "45": 5, "55": 10, "65": 10, "66": 11, "67": 12, "68": 28, "69": 29, "70": 29, "71": 29, "72": 29, "73": 29, "74": 30, "75": 30, "76": 31, "77": 31, "78": 32, "79": 32, "80": 33, "81": 33, "82": 34, "83": 34, "84": 35, "85": 36, "86": 37, "87": 37, "88": 37, "89": 38, "90": 38, "91": 41, "92": 42, "93": 42, "94": 43, "95": 43, "96": 47, "97": 55, "98": 56, "99": 72, "100": 73, "101": 73, "102": 73, "103": 73, "104": 73, "105": 74, "106": 74, "107": 75, "108": 75, "109": 76, "110": 76, "111": 77, "112": 77, "113": 78, "114": 78, "115": 79, "116": 80, "117": 81, "118": 81, "119": 81, "120": 82, "121": 82, "122": 85, "123": 86, "124": 86, "125": 90, "126": 94, "127": 95, "128": 111, "129": 111, "130": 111, "131": 111, "132": 112, "133": 112, "134": 113, "135": 113, "136": 114, "137": 114, "138": 115, "139": 115, "140": 116, "141": 116, "142": 117, "143": 117, "144": 118, "145": 118, "146": 119, "147": 119, "148": 120, "149": 120, "150": 122, "151": 122, "152": 128, "153": 129, "154": 133, "160": 3, "166": 3, "172": 166}}
+{"uri": "user.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/user.html", "source_encoding": "ascii", "line_map": {"27": 0, "40": 1, "45": 5, "55": 10, "65": 10, "66": 11, "67": 12, "68": 28, "69": 29, "70": 29, "71": 29, "72": 29, "73": 29, "74": 30, "75": 30, "76": 31, "77": 31, "78": 32, "79": 32, "80": 33, "81": 33, "82": 34, "83": 34, "84": 35, "85": 36, "86": 37, "87": 37, "88": 37, "89": 38, "90": 38, "91": 41, "92": 42, "93": 42, "94": 43, "95": 43, "96": 47, "97": 55, "98": 56, "99": 72, "100": 73, "101": 73, "102": 73, "103": 73, "104": 73, "105": 74, "106": 74, "107": 75, "108": 75, "109": 76, "110": 76, "111": 77, "112": 77, "113": 78, "114": 78, "115": 79, "116": 80, "117": 81, "118": 81, "119": 81, "120": 82, "121": 82, "122": 85, "123": 86, "124": 86, "125": 90, "126": 94, "127": 95, "128": 111, "129": 111, "130": 111, "131": 111, "132": 112, "133": 112, "134": 113, "135": 113, "136": 114, "137": 114, "138": 115, "139": 115, "140": 116, "141": 116, "142": 117, "143": 117, "144": 118, "145": 118, "146": 119, "147": 119, "148": 120, "149": 120, "150": 122, "151": 122, "152": 128, "153": 129, "154": 133, "160": 3, "166": 3, "172": 166}}
 __M_END_METADATA
 """

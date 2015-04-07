@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425713713.554434
+_modified_time = 1428376764.691663
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Scripts\\colonial\\user\\templates/changepassword.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/changepassword.html'
 _template_uri = 'changepassword.html'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['top_banner', 'contents']
+_exports = ['contents', 'top_banner']
 
 
 def _mako_get_namespace(context, name):
@@ -28,14 +28,14 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        users = context.get('users', UNDEFINED)
-        request = context.get('request', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
+        request = context.get('request', UNDEFINED)
+        users = context.get('users', UNDEFINED)
         form = context.get('form', UNDEFINED)
+        user = context.get('user', UNDEFINED)
         def top_banner():
             return render_top_banner(context._locals(__M_locals))
-        user = context.get('user', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         __M_writer('\r\n')
@@ -53,30 +53,13 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_top_banner(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def top_banner():
-            return render_top_banner(context)
-        users = context.get('users', UNDEFINED)
-        __M_writer = context.writer()
-        __M_writer('\r\n\t<div class="top_banner">Change Password</div>\r\n\t<h1>')
-        __M_writer(str( users.username ))
-        __M_writer('</h1>\r\n\t<h3>')
-        __M_writer(str( users.security_question ))
-        __M_writer('</h3>\r\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        form = context.get('form', UNDEFINED)
-        request = context.get('request', UNDEFINED)
         def contents():
             return render_contents(context)
+        form = context.get('form', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         user = context.get('user', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n')
@@ -96,8 +79,25 @@ def render_contents(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_top_banner(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        users = context.get('users', UNDEFINED)
+        def top_banner():
+            return render_top_banner(context)
+        __M_writer = context.writer()
+        __M_writer('\r\n\t<div class="top_banner">Change Password</div>\r\n\t<h1>')
+        __M_writer(str( users.username ))
+        __M_writer('</h1>\r\n\t<h3>')
+        __M_writer(str( users.security_question ))
+        __M_writer('</h3>\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 """
 __M_BEGIN_METADATA
-{"uri": "changepassword.html", "filename": "C:\\Python34\\Scripts\\colonial\\user\\templates/changepassword.html", "source_encoding": "ascii", "line_map": {"64": 7, "65": 7, "66": 8, "67": 8, "73": 12, "82": 12, "83": 13, "84": 14, "85": 20, "86": 20, "87": 30, "88": 31, "89": 36, "90": 36, "91": 40, "92": 40, "93": 47, "27": 0, "40": 1, "41": 4, "46": 9, "99": 93, "56": 5, "63": 5}}
+{"uri": "changepassword.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/changepassword.html", "source_encoding": "ascii", "line_map": {"65": 12, "66": 13, "67": 14, "68": 20, "69": 20, "70": 30, "71": 31, "72": 36, "73": 36, "74": 40, "75": 40, "76": 47, "82": 5, "99": 93, "89": 5, "90": 7, "91": 7, "92": 8, "93": 8, "27": 0, "40": 1, "41": 4, "46": 9, "56": 12}}
 __M_END_METADATA
 """

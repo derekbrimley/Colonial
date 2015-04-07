@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425631635.593144
+_modified_time = 1428375526.757416
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Scripts\\colonial\\user\\templates/login.loginform.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/login.loginform.html'
 _template_uri = 'login.loginform.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -28,9 +28,9 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         form = context.get('form', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
@@ -47,9 +47,9 @@ def render_body(context,**pageargs):
 def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def contents():
             return render_contents(context)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         form = context.get('form', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\t\r\n\t<div class="text-center">\r\n\t\t<img class="headertitle" src="')
@@ -64,6 +64,6 @@ def render_contents(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Python34\\Scripts\\colonial\\user\\templates/login.loginform.html", "source_encoding": "ascii", "line_map": {"65": 59, "59": 13, "36": 1, "37": 4, "55": 5, "56": 8, "57": 8, "58": 13, "27": 0, "47": 5}, "uri": "login.loginform.html"}
+{"source_encoding": "ascii", "line_map": {"65": 59, "59": 13, "36": 1, "37": 4, "55": 5, "56": 8, "57": 8, "58": 13, "27": 0, "47": 5}, "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\user\\templates/login.loginform.html", "uri": "login.loginform.html"}
 __M_END_METADATA
 """

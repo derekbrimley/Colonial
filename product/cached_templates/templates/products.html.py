@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428055051.983896
+_modified_time = 1428376875.079703
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Projects\\colonial\\product\\templates/products.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\product\\templates/products.html'
 _template_uri = 'products.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -28,6 +28,8 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        products = context.get('products', UNDEFINED)
+        photographs = context.get('photographs', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
@@ -35,8 +37,6 @@ def render_body(context,**pageargs):
             return render_title(context._locals(__M_locals))
         def top_banner():
             return render_top_banner(context._locals(__M_locals))
-        products = context.get('products', UNDEFINED)
-        photographs = context.get('photographs', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n\r\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'title'):
@@ -124,6 +124,6 @@ def render_top_banner(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"70": 14, "71": 25, "72": 27, "73": 29, "74": 30, "75": 31, "76": 32, "77": 33, "78": 33, "79": 33, "80": 33, "81": 33, "82": 34, "83": 34, "84": 35, "85": 35, "86": 37, "87": 37, "88": 37, "89": 37, "90": 37, "27": 0, "92": 37, "93": 37, "94": 42, "95": 44, "91": 37, "101": 3, "41": 1, "107": 3, "46": 6, "125": 119, "113": 8, "51": 10, "119": 8, "61": 14}, "filename": "C:\\Python34\\Projects\\colonial\\product\\templates/products.html", "uri": "products.html", "source_encoding": "ascii"}
+{"uri": "products.html", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\product\\templates/products.html", "source_encoding": "ascii", "line_map": {"70": 14, "71": 25, "72": 27, "73": 29, "74": 30, "75": 31, "76": 32, "77": 33, "78": 33, "79": 33, "80": 33, "81": 33, "82": 34, "83": 34, "84": 35, "85": 35, "86": 37, "87": 37, "88": 37, "89": 37, "90": 37, "27": 0, "92": 37, "93": 37, "94": 42, "95": 44, "91": 37, "101": 3, "41": 1, "107": 3, "46": 6, "125": 119, "113": 8, "51": 10, "119": 8, "61": 14}}
 __M_END_METADATA
 """

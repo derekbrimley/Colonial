@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428373896.825894
+_modified_time = 1428375440.051856
 _enable_loop = True
 _template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/base.htm'
 _template_uri = 'base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['top_banner', 'title', 'contents']
+_exports = ['contents', 'top_banner', 'title']
 
 
 from django_mako_plus.controller import static_files 
@@ -19,16 +19,16 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        self = context.get('self', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        user = context.get('user', UNDEFINED)
-        def title():
-            return render_title(context._locals(__M_locals))
         request = context.get('request', UNDEFINED)
+        self = context.get('self', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
         def top_banner():
             return render_top_banner(context._locals(__M_locals))
+        user = context.get('user', UNDEFINED)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def title():
+            return render_title(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\r\n')
         __M_writer('\r\n')
@@ -57,7 +57,7 @@ def render_body(context,**pageargs):
             __M_writer(str(user.get_username()))
             __M_writer('</label>\r\n\t\t\t\t<a href="/user/login.logout_view/" class="btn btn-primary">Sign Out</a>\r\n\t\t\t<button class="show_button btn btn btn-warning">Show Cart</button>\r\n\t\t</div>\r\n')
         else:
-            __M_writer('      <div class="login_button" style="white-space:nowrap;">\r\n        <label class="welcome label label-danger">Welcome, Guest</label>\r\n        <!-- <a href="/user/login" class="btn btn-primary">Sign In</a> -->\r\n        <button class="show_login_dialog btn btn-primary">Sign In</button>\r\n        <a href="/password_reset/" class="btn btn-default">Forgot Password?</a>\r\n      </div>\r\n\r\n')
+            __M_writer('\t  <div class="login_button" style="white-space:nowrap;">\r\n        <label class="welcome label label-danger">Welcome, Guest</label>\r\n        <!-- <a href="/user/login" class="btn btn-primary">Sign In</a> -->\r\n        <button class="show_login_dialog btn btn-primary">Sign In</button>\r\n        <a href="/password_reset/" class="btn btn-default">Forgot Password?</a>\r\n      </div>\r\n\r\n')
         __M_writer('\r\n\r\n\r\n  <header background=\'none\'>\r\n    <img class="headertitle" src="')
         __M_writer(str( STATIC_URL ))
         __M_writer('home/media/colonialheritage.png" alt="The Colonial Heritage Foundation" >\r\n  </header>\r\n  \r\n    \r\n  <body>\r\n    <div class="container-fluid">      \r\n      <!--<div class="row">\r\n          <div class="col-xs-12">\r\n           <img class="headerphoto" src="')
@@ -88,6 +88,21 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_contents(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def contents():
+            return render_contents(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        __M_writer = context.writer()
+        __M_writer('\r\n            <img id="maincenter" src="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('home/media/colonialman.jpg" alt="Colonial Man" border="5" >\r\n          ')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_top_banner(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -112,23 +127,8 @@ def render_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_contents(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
-        def contents():
-            return render_contents(context)
-        __M_writer = context.writer()
-        __M_writer('\r\n            <img id="maincenter" src="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('home/media/colonialman.jpg" alt="Colonial Man" border="5" >\r\n          ')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "line_map": {"130": 124, "16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "44": 15, "45": 18, "46": 23, "47": 23, "48": 24, "49": 24, "50": 28, "51": 28, "52": 28, "53": 33, "54": 33, "55": 37, "56": 38, "57": 39, "58": 39, "59": 43, "60": 44, "61": 52, "62": 56, "63": 56, "64": 64, "65": 64, "66": 73, "67": 74, "68": 88, "69": 89, "70": 103, "71": 104, "72": 118, "77": 133, "82": 141, "83": 170, "84": 170, "85": 170, "91": 131, "97": 131, "103": 12, "109": 12, "115": 139, "122": 139, "123": 140, "124": 140}, "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/base.htm", "uri": "base.htm"}
+{"uri": "base.htm", "source_encoding": "ascii", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/base.htm", "line_map": {"130": 124, "16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "44": 15, "45": 18, "46": 23, "47": 23, "48": 24, "49": 24, "50": 28, "51": 28, "52": 28, "53": 33, "54": 33, "55": 37, "56": 38, "57": 39, "58": 39, "59": 43, "60": 44, "61": 52, "62": 56, "63": 56, "64": 64, "65": 64, "66": 73, "67": 74, "68": 88, "69": 89, "70": 103, "71": 104, "72": 118, "77": 133, "82": 141, "83": 170, "84": 170, "85": 170, "91": 139, "98": 139, "99": 140, "100": 140, "106": 131, "112": 131, "118": 12, "124": 12}}
 __M_END_METADATA
 """
