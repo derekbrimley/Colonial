@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1422650213.765628
+_modified_time = 1428373582.369776
 _enable_loop = True
-_template_filename = 'C:\\Python34\\Scripts\\colonial\\home\\templates/index.html'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/index.html'
 _template_uri = 'index.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -55,6 +55,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "C:\\Python34\\Scripts\\colonial\\home\\templates/index.html", "source_encoding": "ascii", "uri": "index.html", "line_map": {"56": 50, "34": 1, "27": 0, "44": 3, "50": 3}}
+{"source_encoding": "ascii", "line_map": {"56": 50, "34": 1, "27": 0, "44": 3, "50": 3}, "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\home\\templates/index.html", "uri": "index.html"}
 __M_END_METADATA
 """
