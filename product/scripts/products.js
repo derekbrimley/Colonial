@@ -1,7 +1,18 @@
 $(function () {
 
 	$( '#search_input' ).focusout(function() {
-		input = $(this).val();
+        search();
+    });
+    $('#search_input').keyup(function(e){
+        if(e.keyCode == 13)
+        {
+            search();
+        }
+    });
+
+
+function search(){
+    	input = $('#search_input').val();
 		console.log(input);
 
 
@@ -10,12 +21,11 @@ $(function () {
 			data: { 'input': input},//data
 			success: function(data) {
 				$('.products').html(data);
-			 },//success
+			 }//success
 
 
 		});//ajax
-
-
+}
 
 		// $('').ajaxForm(function(data) {
 		// 	$('#loginform_container').html(data);
@@ -45,5 +55,4 @@ $(function () {
 		// 	width: '900px',
 		// });//loadmodal
 
-	});//focusout
 });//ready
