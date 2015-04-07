@@ -1,141 +1,20 @@
-<%inherit file="base.htm" />
+<%inherit file="/home/templates/base.htm" />
 
 <%block name="top_banner">
 	<div class="top_banner">Inventory</div>
 </%block>
 
-
-
 <%block name="contents">
-	## This If and Else will show different tables based on if someone is logged in or not
+	<span class="text-right">
+		<a id="non-rentable" class="btn btn-primary">Non-Rentable Items</a>
+		<a id="wardrobe" class="btn btn-primary">Wardrobe Items</a>
+		<a id="rentable" class="btn btn-primary">Rentable Items</a>
+	</span>
+	<div id="items_container">
+	</div>
 
-	%if request.user.has_perm('home.is_manager'):
-	
-		<table id="display_table" class="table table-striped table-bordered">
-			
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Value</th>
-				<th>Standard Rental Price</th>
-				<th>Rentable</th>
-				<th>Size</th>
-				<th>Size Modifier</th>
-				<th>Gender</th>
-				<th>Color</th>
-				<th>Pattern</th>
-				<th>Start Year</th>
-				<th>End Year</th>
-				<th>Notes</th>
-				<th>Actions</th>
+	<div class="text-right">
+		<a href="/product/items.create/" class="btn btn-success">Add an Item</a>
+	</div>
 
-			</tr>
-			<tr>
-				%for item in items:
-				<td>${item.name}</td>
-				<td>${item.description}</td>
-				<td>${item.value}</td>
-				<td>${item.standard_rental_price}</td>
-				<td>${item.rentable}</td>
-				<td>${item.size}</td>
-				<td>${item.size_modifier}</td>
-				<td>${item.gender}</td>
-				<td>${item.color}</td>
-				<td>${item.pattern}</td>
-				<td>${item.start_year}</td>
-				<td>${item.end_year}</td>
-				<td>${item.note}</td>
-				<td>
-				<a href="/home/items.edit/${item.id}">Edit</a> | 
-				<a href="/home/items.delete/${item.id}">Delete</a>
-				</td>
-			</tr>
-			%endfor
-		</table>
-
-		<div class="text-right">
-			<a href="/home/items.create/" class="btn btn-success">Add an Item</a>
-		</div>
-
-	%elif request.user.has_perm('home.is_agent'):
-		<table id="display_table" class="table table-striped table-bordered">
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Value</th>
-				<th>Standard Rental Price</th>
-				<th>Rentable</th>
-				<th>Size</th>
-				<th>Size Modifier</th>
-				<th>Gender</th>
-				<th>Color</th>
-				<th>Pattern</th>
-				<th>Start Year</th>
-				<th>End Year</th>
-				<th>Notes</th>
-				<th>Actions</th>
-
-			</tr>
-			<tr>
-				%for item in items:
-				<td>${item.name}</td>
-				<td>${item.description}</td>
-				<td>${item.value}</td>
-				<td>${item.standard_rental_price}</td>
-				<td>${item.rentable}</td>
-				<td>${item.size}</td>
-				<td>${item.size_modifier}</td>
-				<td>${item.gender}</td>
-				<td>${item.color}</td>
-				<td>${item.pattern}</td>
-				<td>${item.start_year}</td>
-				<td>${item.end_year}</td>
-				<td>${item.note}</td>
-				<td>
-				<a href="/home/items.edit/${item.id}">Edit</a>
-				</td>
-			</tr>
-			%endfor
-		</table>
-
-	%else:
-
-		<table id="display_table" class="table table-striped table-bordered">
-			
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Value</th>
-				<th>Standard Rental Price</th>
-				<th>Rentable</th>
-				<th>Size</th>
-				<th>Size Modifier</th>
-				<th>Gender</th>
-				<th>Color</th>
-				<th>Pattern</th>
-				<th>Start Year</th>
-				<th>End Year</th>
-				<th>Notes</th>
-
-			</tr>
-			<tr>
-				%for item in items:
-				<td>${item.name}</td>
-				<td>${item.description}</td>
-				<td>${item.value}</td>
-				<td>${item.standard_rental_price}</td>
-				<td>${item.rentable}</td>
-				<td>${item.size}</td>
-				<td>${item.size_modifier}</td>
-				<td>${item.gender}</td>
-				<td>${item.color}</td>
-				<td>${item.pattern}</td>
-				<td>${item.start_year}</td>
-				<td>${item.end_year}</td>
-				<td>${item.note}</td>
-			</tr>
-			%endfor
-		</table>
-
-	%endif
 </%block>

@@ -4,14 +4,12 @@ $(function () {
 		input = $(this).val();
 		console.log(input);
 
-
 		$.ajax({
 			url: '/product/products.search/',
 			data: { 'input': input},//data
 			success: function(data) {
 				$('.products').html(data);
 			 },//success
-
 
 		});//ajax
 

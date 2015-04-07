@@ -137,37 +137,7 @@ class Transaction(models.Model):
 	##I am changing this so that it will return the customer when it is called
 	# def __str__(self):
 	# 	return '{}'.format(self.customer)
-	
 
-##Deprecated from Sprint 2 to Sprint 3. Category and Product Specification are in the Stocked Product class now.
-# class Category(models.Model):
-# 	##CLASS TO CATEGORIZE PRODUCTS
-# 	description = models.TextField(max_length=200)
-	
-# 	class Meta:
-# 		verbose_name_plural = 'categories'
-	
-# 	def __str__(self):
-# 		return self.description
-	
-# class ProductSpecification(models.Model):
-# 	##DETAILS ABOUT A PRODUCT
-# 	name = models.TextField()
-# 	price = models.DecimalField(max_digits=10, decimal_places=2)
-# 	description = models.TextField()
-# 	manufacturer = models.TextField()
-# 	average_cost = models.DecimalField(max_digits=10, decimal_places=2)
-# 	sku = models.TextField()
-# 	order_form_name = models.TextField()
-# 	production_time = models.DateField()
-# 	description = models.TextField(max_length=200)
-# 	photo = models.ForeignKey('Photograph')
-	
-# 	def __str__(self):
-# 		return '{} {}'.format(self.name, self.photo)
-
-
-#Bringing it back now
 class Category(models.Model):
 	##CLASS TO CATEGORIZE PRODUCTS
 	description = models.TextField(max_length=200)
@@ -195,13 +165,12 @@ class ProductSpecification(models.Model):
 	def __str__(self):
 		return '{} {}'.format(self.name, self.photo)
 
-
 class StockedProduct(PolymorphicModel): #changed to polymorphic model
 	##DETAILS ABOUT A PRODUCT
 	quantity_on_hand = models.IntegerField(null=True)
 	shelf_location = models.TextField(null=True)
 	order_file = models.TextField(null=True)
-	
+	product_specification = models.ForeignKey(ProductSpecification)
 
 	def __str__(self):
 		return '{} {} {}'.format(self.quantity_on_hand, self.shelf_location, self.order_file)

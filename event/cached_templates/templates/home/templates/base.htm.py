@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428376847.566085
+_modified_time = 1428381269.335146
 _enable_loop = True
 _template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial/home/templates/base.htm'
 _template_uri = '/home/templates/base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['contents', 'title', 'top_banner']
+_exports = ['top_banner', 'title', 'contents']
 
 
 from django_mako_plus.controller import static_files 
@@ -20,15 +20,15 @@ def render_body(context,**pageargs):
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         def contents():
             return render_contents(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
+        def top_banner():
+            return render_top_banner(context._locals(__M_locals))
+        self = context.get('self', UNDEFINED)
         def title():
             return render_title(context._locals(__M_locals))
         user = context.get('user', UNDEFINED)
-        self = context.get('self', UNDEFINED)
-        def top_banner():
-            return render_top_banner(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\r\n')
         __M_writer('\r\n')
@@ -64,7 +64,7 @@ def render_body(context,**pageargs):
         __M_writer(str( STATIC_URL ))
         __M_writer('home/media/sign.jpg" alt="The Signing" > \r\n          </div>\r\n        </div> -->\r\n\r\n      <div class="row">\r\n        <nav id="myNavbar" role="navigation">\r\n          <!-- Brand and toggle get grouped for better mobile display -->\r\n          <div class="container-nav">\r\n\r\n')
         if request.user.has_perm('home.agent'):
-            __M_writer('              <!-- If the person is not a guest -->\r\n              <div class="collapse navbar-collapse" id="navbarCollapse">\r\n                <ul class="nav nav-justified">\r\n                  <li><a href="http://localhost:8000/home/index" target="">Home</a></li>\r\n                  <li><a href="http://localhost:8000/user/user" target="">Accounts</a></li>\r\n                  <li><a href="http://localhost:8000/event/events" target="">Events</a></li>\r\n                  <li><a href="http://localhost:8000/home/items" target="">Inventory</a></li>\r\n                  <li><a href="http://localhost:8000/product/products" target="">Products</a></li>\r\n                  <li><a href="http://localhost:8000/rental/rentals" target="">Rentals</a></li>\r\n                  <li><a href="http://localhost:8000/home/tools" target="">Tools</a></li>\r\n                  <li><a href="http://localhost:8000/home/about" target="">About Us</a></li>\r\n                </ul>\r\n              </div> \r\n\r\n')
+            __M_writer('              <!-- If the person is not a guest -->\r\n              <div class="collapse navbar-collapse" id="navbarCollapse">\r\n                <ul class="nav nav-justified">\r\n                  <li><a href="http://localhost:8000/home/index" target="">Home</a></li>\r\n                  <li><a href="http://localhost:8000/user/user" target="">Accounts</a></li>\r\n                  <li><a href="http://localhost:8000/event/events" target="">Events</a></li>\r\n                  <li><a href="http://localhost:8000/product/items" target="">Inventory</a></li>\r\n                  <li><a href="http://localhost:8000/product/products" target="">Products</a></li>\r\n                  <li><a href="http://localhost:8000/rental/rentals" target="">Rentals</a></li>\r\n                  <li><a href="http://localhost:8000/home/tools" target="">Tools</a></li>\r\n                  <li><a href="http://localhost:8000/home/about" target="">About Us</a></li>\r\n                </ul>\r\n              </div> \r\n\r\n')
         elif request.user.is_authenticated():
             __M_writer('              <!--Guest-->\r\n                <div class="collapse navbar-collapse" id="navbarCollapse">\r\n                  <ul class="nav nav-justified">\r\n                      <li><a href="http://localhost:8000/home/index" target="">Home</a></li>\r\n                      <li><a href="http://localhost:8000/user/user" target="">My Account</a></li>\r\n                      <li><a href="http://localhost:8000/rental/rentals.view" target="">My Rentals</a></li>\r\n                      <li><a href="http://localhost:8000/home/orders" target="">My Orders</a></li>\r\n                      <li><a href="http://localhost:8000/event/events" target="">Events</a></li>\r\n                      <li><a href="http://localhost:8000/product/products" target="">Products</a></li>\r\n\r\n                      <li><a href="http://localhost:8000/home/about" target="">About Us</a></li>\r\n                  </ul>\r\n                </div>\r\n\r\n')
         else:
@@ -88,16 +88,13 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_contents(context,**pageargs):
+def render_top_banner(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def contents():
-            return render_contents(context)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def top_banner():
+            return render_top_banner(context)
         __M_writer = context.writer()
-        __M_writer('\r\n            <img id="maincenter" src="')
-        __M_writer(str( STATIC_URL ))
-        __M_writer('home/media/colonialman.jpg" alt="Colonial Man" border="5" >\r\n          ')
+        __M_writer('\r\n            <div class="top_banner">Welcome to the Colonial Heritage Foundation</div>\r\n          ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -115,13 +112,16 @@ def render_title(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_top_banner(context,**pageargs):
+def render_contents(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        def top_banner():
-            return render_top_banner(context)
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def contents():
+            return render_contents(context)
         __M_writer = context.writer()
-        __M_writer('\r\n            <div class="top_banner">Welcome to the Colonial Heritage Foundation</div>\r\n          ')
+        __M_writer('\r\n            <img id="maincenter" src="')
+        __M_writer(str( STATIC_URL ))
+        __M_writer('home/media/colonialman.jpg" alt="Colonial Man" border="5" >\r\n          ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -129,6 +129,6 @@ def render_top_banner(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "/home/templates/base.htm", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial/home/templates/base.htm", "source_encoding": "ascii", "line_map": {"130": 124, "16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "44": 15, "45": 18, "46": 23, "47": 23, "48": 24, "49": 24, "50": 28, "51": 28, "52": 28, "53": 33, "54": 33, "55": 37, "56": 38, "57": 39, "58": 39, "59": 43, "60": 44, "61": 52, "62": 56, "63": 56, "64": 64, "65": 64, "66": 73, "67": 74, "68": 88, "69": 89, "70": 103, "71": 104, "72": 118, "77": 133, "82": 141, "83": 170, "84": 170, "85": 170, "91": 139, "98": 139, "99": 140, "100": 140, "106": 12, "112": 12, "118": 131, "124": 131}}
+{"source_encoding": "ascii", "line_map": {"130": 124, "16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "44": 15, "45": 18, "46": 23, "47": 23, "48": 24, "49": 24, "50": 28, "51": 28, "52": 28, "53": 33, "54": 33, "55": 37, "56": 38, "57": 39, "58": 39, "59": 43, "60": 44, "61": 52, "62": 56, "63": 56, "64": 64, "65": 64, "66": 73, "67": 74, "68": 88, "69": 89, "70": 103, "71": 104, "72": 118, "77": 133, "82": 141, "83": 170, "84": 170, "85": 170, "91": 131, "97": 131, "103": 12, "109": 12, "115": 139, "122": 139, "123": 140, "124": 140}, "uri": "/home/templates/base.htm", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial/home/templates/base.htm"}
 __M_END_METADATA
 """

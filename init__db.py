@@ -71,7 +71,8 @@ for data in [
     [ "Otto", "Scorzeny", "ottoP", "otto1", False, 9, "default@chf.com", '801-423-1428', "What is the answer to the universe?", "41"],
 	[ "Erwin", "Rommel", "erwinP", "erwin1", False, 10, "default@chf.com", '801-423-1428', "What is the answer to the universe?", "41"],
 	[ "George", "Patton", "georgeP", "georges1", False, 11, "default@chf.com", '801-423-1428', "What is the answer to the universe?", "41"],
-	[ "Omar", "Bradley", "omarP", "omar1", False, 12, "default@chf.com", '801-423-1428', "What is the answer to the universe?", "41"],   
+	[ "Omar", "Bradley", "omarP", "omar1", False, 12, "default@chf.com", '801-423-1428', "What is the answer to the universe?", "41"],  
+	[ "Derek", "Brimley", "dbrimley", "password", True, 1, "derekbrimley@gmail.com", '801-423-1428', "What is the answer to the universe?", "41"],	
 ]:
     u = hmod.User()
     u.first_name = data[0]
@@ -147,52 +148,6 @@ finally:
     if con:
         con.close()
 #^^^^^Permissions^^^^^#
-
-
-
-
-################################Start Inserting an image
-# def readImage():
-
-#     try:
-# 	    fin = open("shop-placeholder.png","rb")
-# 	    img = fin.read()
-# 	    return img
-        
-#     except:
-
-        
-#         sys.exit(1)
-
-#     finally:
-        
-#         if fin:
-#             fin.close()
-
-
-# try:
-#     con = psycopg2.connect(database="colonial", user="postgres", password="password") 
-    
-#     cur = con.cursor()
-#     data = readImage()
-#     binary = psycopg2.Binary(data)
-#     cur.execute("INSERT INTO PHOTOGRAPH VALUES (01/01/2015, Colonial Heritage Event, '1', %s)", (binary,) )
-
-#     con.commit()    
-    
-# except:
-
-#     if con:
-#         con.rollback()
-
-#     print   
-#     sys.exit(1)
-    
-# finally:
-    
-#     if con:
-#         con.close() 
-###################################End Inserting an image
 
 
 #Photograph
@@ -286,7 +241,6 @@ for data in [
     u.event_id = data[7]
     u.save()
 
-
 #Area
 for data in [
     [ "Bakery", "This is where the bread is baked.", 1, 1, 2, 1 ],
@@ -311,7 +265,6 @@ for data in [
     #u.participants_id = data[6]
     u.save()
 
-
 #UserRole
 for data in [
     [ 5, 5, "Cooper", "Artisan", 3 ],
@@ -325,7 +278,6 @@ for data in [
     #if data[4] != None:
     u.historical_figure_id = data[4]
     u.save()
-
 
 #ExpectedSaleItem
 for data in [
@@ -341,7 +293,6 @@ for data in [
     u.photo = data[4] 
     u.area_id = data[5]
     u.save()
-
 
 #Transaction
 for data in [
@@ -381,9 +332,6 @@ for data in [
     u.handled_by_id = data[11]
     u.customer_id = data[12]
     u.save()
-
-
-
 
 #Category
 for data in [
@@ -433,7 +381,6 @@ for data in [
     u.vendor_id = data[9]
     u.category_id = data[10]
     u.save()
-
 
 #StockedProduct
 for data in [

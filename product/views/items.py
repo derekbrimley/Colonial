@@ -3,48 +3,91 @@ from django import forms
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.http import HttpRequest
 from django_mako_plus.controller import view_function
-from home import models as imod
+from home import models as hmod
 from django_mako_plus.controller.router import get_renderer
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group, Permission
 
-templater = get_renderer('home')
+templater = get_renderer('product')
 
 
-#############################Items
+#############################
 @view_function
 #@permission_required('home.is_agent',login_url='/home/login/')
 def process_request(request):
 	params = {}
 
-	items = imod.Item.objects.all().order_by('name')
-
-	params['items'] = items
+	products = hmod.SerializedProduct.objects.all()
+	product_infos = hmod.ProductSpecification.objects.all()
+	
+	print(products)
+	print(product_infos)
+	params['product_infos'] = product_infos
+	params['products'] = products
 
 	return templater.render_to_response(request, 'items.html', params)
 
+#############################
+@view_function
+def rentable(request):
+	params = {}
 
+	products = hmod.RentableProduct.objects.all()
+	product_infos = hmod.ProductSpecification.objects.all()
+	
+	print(products)
+	print(product_infos)
+	params['product_infos'] = product_infos
+	params['products'] = products
 
+	return templater.render_to_response(request, 'items.rentable_ajax.html', params)
+		
+	
+#############################
+@view_function
+def wardrobe(request):
+	params = {}
+
+	products = hmod.WardrobeItem.objects.all()
+	product_infos = hmod.ProductSpecification.objects.all()
+	
+	print(products)
+	print(product_infos)
+	params['product_infos'] = product_infos
+	params['products'] = products
+
+	return templater.render_to_response(request, 'items.wardrobe_ajax.html', params)
+	
+#############################
+@view_function
+def non_rentable(request):
+	params = {}
+
+	products = hmod.SerializedProduct.objects.all()
+	product_infos = hmod.ProductSpecification.objects.all()
+	
+	print(products)
+	print(product_infos)
+	params['product_infos'] = product_infos
+	params['products'] = products
+
+	return templater.render_to_response(request, 'items.non_rentable_ajax.html', params)
 
 
 #############################Edit
 @view_function
 @permission_required('home.is_agent',login_url='/home/items/')
-def edit(request):
+def edit_rentable(request):
 
 	params = {}
 	print(request.urlparams[0])
 
 	try:
-		item = imod.Item.objects.get(id=request.urlparams[0])
-
-	except imod.item.DoesNotExist:
-
+		item = hmod.RentableProduct.objects.get(id=request.urlparams[0])
+	except hmod.Item.DoesNotExist:
 		return HttpResponseRedirect('/home/items/')
 
-
-
-	form = itemEditForm(initial={
+	form = RentableItemEditForm(initial={
 		'name' : item.name,
 		'description': item.description,
 		'value': item.value,
@@ -60,7 +103,7 @@ def edit(request):
 		'note' : item.note})
 
 	if request.method == "POST":
-		form = itemEditForm(request.POST)
+		form = RentableItemEditForm(request.POST)
 		if form.is_valid():
 			item.name = form.cleaned_data['name']
 			item.description = form.cleaned_data['description']
@@ -80,24 +123,18 @@ def edit(request):
 
 			return HttpResponseRedirect('/home/items/')
 
-
-
 	params['form'] = form
 	params['item'] = item
 
 	return templater.render_to_response(request, 'items.edit.html', params)
 
-
-
-
-class itemEditForm(forms.Form):
+class RentableItemEditForm(forms.Form):
 
 	name = forms.CharField(label='Name', required=True)
 	description = forms.CharField(label='Description', required=False)
 	value = forms.IntegerField(label='Value', required=True)
 	standard_rental_price = forms.IntegerField(label='Standard Rental Price', required=False)
 	rentable = forms.BooleanField(label='Rentable', required=False)
-
 	size = forms.DecimalField(label='Size', required=False)
 	size_modifier = forms.DecimalField(label='Modifier', required=False)
 	gender = forms.CharField(label='Gender', required=False)
@@ -107,13 +144,12 @@ class itemEditForm(forms.Form):
 	end_year = forms.DateField(label='End Year', required=False)
 	note = forms.CharField(label='Notes', required=False)
 
-
 ############################Create
 @view_function
 @permission_required('home.is_manager',login_url='/home/items/')
-def create(request):
+def create_rentable(request):
 	'''create a new item'''
-	item = imod.Item()
+	item = hmod.Item()
 	item.name = ''
 	item.description = ''
 	item.value = 0
@@ -129,24 +165,35 @@ def create(request):
 	item.note =''
 	item.save()
 
-
-	return HttpResponseRedirect('/home/items.edit/{}/'.format(item.id))
-
-
+	return HttpResponseRedirect('/home/items.edit_rentable/{}/'.format(item.id))
 
 ###########################Delete
 @view_function
 @permission_required('home.is_manager',login_url='/home/items/')
 def delete(request):
 	'''Deletes a new item'''
-	
-
-
 	try:
-		item = imod.Item.objects.get(id=request.urlparams[0])
-	except imod.DoesNotExist:
+		item = hmod.StockedProduct.objects.get(id=request.urlparams[0])
+		item_info = hmod.Product_Specification.objects.get(id=item.product_specification_id)
+	except hmod.DoesNotExist:
 		return HttpResponseRedirect('/home/items/')
 
 	item.delete()
+	item_info.delete()
 
 	return HttpResponseRedirect('/home/items/')
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
