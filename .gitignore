@@ -93,3 +93,7 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+user/cached_templates/
+product/views/_pycache_/
+event/cached_templates/
