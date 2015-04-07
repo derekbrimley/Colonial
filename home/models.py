@@ -76,7 +76,7 @@ class Event(models.Model):
 	end_date = models.DateField()
 	map_file = models.TextField(max_length=200) 
 	venue_name = models.TextField(max_length=200)
-	address = models.ForeignKey(Address, related_name='+')
+	address = models.ForeignKey(Address, related_name='+',null=True)
 	
 class HistoricalFigure(models.Model):
 	##HISTORICAL FIGURE THAT WILL BE PORTRAYED AT EVENT

@@ -24,6 +24,8 @@
 				<th>Start Date</th>
 				<th>End Date</th>
 				<th>Map File</th>
+				<th>Venue Name</th>
+				<th>Address</th>
 				<th>Actions</th>
 			</tr>
 			<tr>
@@ -33,16 +35,22 @@
 				<td>${event.start_date}</td>
 				<td>${event.end_date}</td>
 				<td>${event.map_file}</td>
+				<td>${event.venue_name}</td>
+				%for address in addresses:
+					%if address.id == event.address_id:
+						<td>${address.address1}, ${address.city} ${address.state}</td>
+					%endif
+				%endfor
 				<td>
-				<a href="/home/events.edit/${event.id}">Edit</a> | 
-				<a href="/home/events.delete/${event.id}">Delete</a>
+				<a href="/event/events.edit/${event.id}">Edit</a> | 
+				<a href="/event/events.delete/${event.id}">Delete</a>
 				</td>
 			</tr>
 			%endfor
 		</table>
 
 		<div class="text-right">
-			<a href="/home/events.create/" class="btn btn-success">Add an Event</a>
+			<a href="/event/events.create/" class="btn btn-success">Add an Event</a>
 		</div>
 	  
 	%elif request.user.has_perm('home.is_agent'):
@@ -65,7 +73,7 @@
 				<td>${event.end_date}</td>
 				<td>${event.map_file}</td>
 				<td>
-				<a href="/home/events.edit/${event.id}">Edit</a>
+				<a href="/event/events.edit/${event.id}">Edit</a>
 				</td>
 			</tr>
 			%endfor

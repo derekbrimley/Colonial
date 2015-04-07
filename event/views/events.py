@@ -11,20 +11,12 @@ from django.contrib.auth.models import User, Group, Permission
 templater = get_renderer('event')
 
 @view_function
-# #This permission required will allow managers and agents and customers to see this account page
-#@permission_required('home.is_agent',login_url='/home/login/')
 def process_request(request):
-
-	# for group in request.user.groups.all():
-	# 	print('>>>', group)
-	# 	for perm in group.permissions.all():
-	# 		print(perm)
-	# print('<<<', request.user.has_perm('admin.is_manager'))
-	# print(request.user.get_all_permissions())
 
 	params = {}
 
 	events = hmod.Event.objects.all().order_by('id')
+	addresses = hmod.Address.objects.all()
 	photographs = hmod.Photograph.objects.all()
 	photos = []
 
@@ -38,10 +30,8 @@ def process_request(request):
 
 	params['events'] = events
 	params['photos'] = photos
-
+	params['addresses'] = addresses
 	return templater.render_to_response(request, 'events.html', params)
-
-
 
 #Detail
 @view_function
@@ -86,18 +76,18 @@ def detail(request):
 
 @view_function
 #This permission required will allow managers and agents to access
-@permission_required('home.is_agent',login_url='/home/events/')
+@permission_required('home.agent',login_url='/event/events/')
 def edit(request):
 
 	params = {}
-	print(request.urlparams[0])
+	print("PARAMETER::::::",request.urlparams[0])
 
 	try:
 		event = hmod.Event.objects.get(id=request.urlparams[0])
-
+		print("EVENT EXISTS")
 	except hmod.event.DoesNotExist:
-
-		return HttpResponseRedirect('/home/events/')
+		print("EVENT DOES NOT EXIST>>>>>>>>>>>>>>>>")
+		return HttpResponseRedirect('/event/events/')
 
 
 
@@ -106,9 +96,14 @@ def edit(request):
 		'description': event.description,
 		'start_date' : event.start_date,
 		'end_date' : event.end_date,
-		'map_file' : event.map_file})
+		'map_file' : event.map_file,
+		'venue_name' : event.venue_name,
+		'address_id' : event.address_id
+		}
+	)
 
 	if request.method == "POST":
+		print("POSTING....")
 		form = eventEditForm(request.POST)
 		if form.is_valid():
 			event.name = form.cleaned_data['name']
@@ -116,32 +111,29 @@ def edit(request):
 			event.start_date = form.cleaned_data['start_date']
 			event.end_date = form.cleaned_data['end_date']
 			event.map_file = form.cleaned_data['map_file']
+			event.venue_name = form.cleaned_data['venue_name']
+			event.address_id = form.cleaned_data['address_id']
 			event.save()
-			return HttpResponseRedirect('/home/events/')
-
-
+			return HttpResponseRedirect('/event/events/')
 
 	params['form'] = form
 	params['event'] = event
 
 	return templater.render_to_response(request, 'events.edit.html', params)
 
-
-
-
 class eventEditForm(forms.Form):
-	name = forms.CharField(label="Name", required=True, max_length=100)
-	description = forms.CharField(label="Description", required=True, max_length=100)
-	start_date = forms.CharField(label="Start Date", required=True, max_length=100)
-	end_date = forms.CharField(label="End Date", required=True, max_length=100)
-	map_file = forms.IntegerField(label="Map File", required=True)
-
-
+	name = forms.CharField(label="Name",required=True,max_length=100)
+	description = forms.CharField(label="Description",required=True,max_length=100)
+	start_date = forms.CharField(label="Start Date",required=True,max_length=100)
+	end_date = forms.CharField(label="End Date",required=True,max_length=100)
+	map_file = forms.IntegerField(label="Map File",required=True)
+	venue_name = forms.CharField(label="Venue Name",required=True,max_length=100)
+	address_id = forms.CharField(label="Address ID",required=True,max_length=100)
 
 #########################Create
 @view_function
 #This permission required will allow managers and agents to access
-@permission_required('home.is_manager',login_url='/home/events/')
+@permission_required('home.manager',login_url='/event/events/')
 def create(request):
 	'''create a new event'''
 	event = hmod.Event()
@@ -150,24 +142,26 @@ def create(request):
 	event.start_date = '1111-1-1'
 	event.end_date = '1111-1-1'
 	event.map_file = '111'
+	event.venue_name = ''
+	event.address_id = 1
 	event.save()
 
 
-	return HttpResponseRedirect('/home/events.edit/{}/'.format(event.id))
+	return HttpResponseRedirect('/event/events.edit/{}/'.format(event.id))
 
 
 ##########################Delete
 @view_function
 #This permission required will allow managers and agents to access
-@permission_required('home.is_manager',login_url='/home/events/')
+@permission_required('home.manager',login_url='/event/events/')
 def delete(request):
 	'''Deletes a new event'''
 	
 	try:
 		event = hmod.Event.objects.get(id=request.urlparams[0])
 	except hmod.DoesNotExist:
-		return HttpResponseRedirect('/home/events/')
+		return HttpResponseRedirect('/event/events/')
 
 	event.delete()
 
-	return HttpResponseRedirect('/home/events/')
+	return HttpResponseRedirect('/event/events/')

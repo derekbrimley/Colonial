@@ -4,10 +4,10 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428379558.350987
+_modified_time = 1428378144.806074
 _enable_loop = True
-_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial\\event\\templates/base.htm'
-_template_uri = 'base.htm'
+_template_filename = 'C:\\Users\\Derek\\python\\colonial\\colonial/event/templates/base.htm'
+_template_uri = '/event/templates/base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
 _exports = ['content']
@@ -19,9 +19,9 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        self = context.get('self', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        self = context.get('self', UNDEFINED)
         request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\r\n')
@@ -62,6 +62,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "base.htm", "source_encoding": "ascii", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial\\event\\templates/base.htm", "line_map": {"33": 5, "34": 15, "35": 18, "36": 18, "37": 18, "42": 29, "43": 32, "44": 32, "45": 32, "16": 4, "18": 0, "51": 27, "57": 27, "27": 2, "28": 4, "29": 5, "63": 57}}
+{"uri": "/event/templates/base.htm", "source_encoding": "ascii", "filename": "C:\\Users\\Derek\\python\\colonial\\colonial/event/templates/base.htm", "line_map": {"33": 5, "34": 15, "35": 18, "36": 18, "37": 18, "42": 29, "43": 32, "44": 32, "45": 32, "16": 4, "18": 0, "51": 27, "57": 27, "27": 2, "28": 4, "29": 5, "63": 57}}
 __M_END_METADATA
 """
