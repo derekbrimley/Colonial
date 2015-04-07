@@ -55,47 +55,51 @@ def detail(request):
 #Search
 @view_function
 def search(request):
-	#Params passed to this def by products.js
-	#/product/products.search/" input "/","
-	#Search Input @@ data dictionary where input = search
+    #Params passed to this def by products.js
+    #/product/products.search/" input "/","
+    #Search Input @@ data dictionary where input = search
 
-	params = {}
-	#This is the contents currently in the search box
-	search_string = request.REQUEST.get('input')
-	
-	#Pull photo graph and product information, order by id
-	photographs = vmod.Photograph.objects.all().order_by('id')
-	products = vmod.ProductSpecification.objects.all().order_by('id')
+    params = {}
+    #This is the contents currently in the search box
+    search = request.REQUEST.get('input')
+    search_string = search.lower()
+    print('s>>>>>>>>>>>>>>>>>>>>>>>',search_string)
 
-	#This array will have the products search for
-	search_products = []
-	search_photos = []
 
-	for product in products:
-		if search_string in product.name:
-			print('Product name: ', product.name)
-			
-			#Get the product object and then add it in the list
-			product_object = vmod.ProductSpecification.objects.get(id=product.id)
-			search_products.append(product_object)
-			
-			#Get the photo object and then add it in the list
-			photo_object = vmod.Photograph.objects.get(id=product.id)
-			search_photos.append(photo_object)
+    #Pull photo graph and product information, order by id
+    photographs = vmod.Photograph.objects.all().order_by('id')
+    products = vmod.ProductSpecification.objects.all().order_by('id')
 
-		else:
-			print(search_string,' not in', product.name)
+    #This array will have the products search for
+    search_products = []
+    search_photos = []
 
-	print('>>>>',search_products)
-	print('>>>>',search_photos)
+    for product in products:
+        product_name = product.name.lower()
+        if search_string in product_name:
+            print('Product name: ', product.name)
 
-	#Fill the params with the objects, we will send them to the webpage
-	params['photographs'] = search_photos
-	params['products'] = search_products
+            #Get the product object and then add it in the list
+            product_object = vmod.ProductSpecification.objects.get(id=product.id)
+            search_products.append(product_object)
 
-	##return HttpResponseRedirect('/product/product.search/{}', params)
-	return templater.render_to_response(request, '/product.search.html/', params)
-	##return HttpResponse('Hey Hey')
+            #Get the photo object and then add it in the list
+            photo_object = vmod.Photograph.objects.get(id=product.id)
+            search_photos.append(photo_object)
+
+        else:
+            print(search_string,' not in', product.name)
+
+    print('>>>>',search_products)
+    print('>>>>',search_photos)
+
+    #Fill the params with the objects, we will send them to the webpage
+    params['photographs'] = search_photos
+    params['products'] = search_products
+
+    ##return HttpResponseRedirect('/product/product.search/{}', params)
+    return templater.render_to_response(request, '/product.search.html/', params)
+    ##return HttpResponse('Hey Hey')
 
 
 
