@@ -276,6 +276,7 @@ class Fee(models.Model):
 	##TYPE OF TRANSACTION WHEN FEES ASSIGNED--ABSTRACT
 	amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, default="0.0")
 	waived = models.BooleanField(default=True)
+	paid = models.BooleanField(default=True)
 	days_late = models.IntegerField(null=True, default="0")
 	description = models.TextField(null=True, default="Enter Damage Here")
 	rental_item = models.ForeignKey(RentalItem, related_name='rental_fees', null=True)

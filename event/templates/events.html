@@ -14,7 +14,7 @@
 <%block name="contents">
 	## This If and Else will show different tables based on if someone is logged in or not
 
-	%if request.user.has_perm('home.is_manager'):
+	%if request.user.has_perm('home.manager'):
 
 		<table id="display_table" class="table table-striped table-bordered">
 			
@@ -45,7 +45,7 @@
 			<a href="/home/events.create/" class="btn btn-success">Add an Event</a>
 		</div>
 	  
-	%elif request.user.has_perm('home.is_agent'):
+	%elif request.user.has_perm('home.agent'):
 
 		<table id="display_table" class="table table-striped table-bordered">
 			

@@ -10,7 +10,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group, Permission
 import time
 from datetime import date
-import decimal 
+import decimal
+import requests
+from django.core.mail import send_mail 
 
 
 templater = get_renderer('rental')
@@ -121,10 +123,11 @@ def edit(request):
 
 	#Get params objects
 	rental = hmod.RentalItem.objects.get(id=request.urlparams[0])
-	transaction = hmod.Transaction.objects.get(id=request.urlparams[1])
-	user = hmod.User.objects.get(id=request.urlparams[2])
-	product = hmod.ProductSpecification.objects.get(id=request.urlparams[3])
+	transaction = hmod.Transaction.objects.get(id=rental.transaction_id)
+	user = hmod.User.objects.get(id=transaction.customer_id)
+	product = hmod.ProductSpecification.objects.get(id=rental.rentable_product_id)
 	
+
 	form = TransactionForm(initial={
 		'date' : transaction.date,
 		'date_packed' : transaction.date_packed,
@@ -190,6 +193,9 @@ def edit_fee(request):
 
 	#Get params objects
 	rental = hmod.RentalItem.objects.get(id=request.urlparams[0])
+	transaction = hmod.Transaction.objects.get(id=rental.transaction_id)
+	customer = hmod.User.objects.get(id=transaction.customer_id)
+	product = hmod.ProductSpecification.objects.get(id=rental.rentable_product_id)
 
 	try:
 		print(">>>>",rental.id)
@@ -204,10 +210,11 @@ def edit_fee(request):
 
 	feeform = FeeForm(initial={
 	'amount' : fee.amount,
+    'paid' : fee.paid,
 	'waived' : fee.waived,
 	'days_late' : fee.days_late,
 	'description' : fee.description,
-	'rental_item' : fee.rental_item_id,
+	#'rental_item' : fee.rental_item_id,
 	})
 
 
@@ -216,10 +223,11 @@ def edit_fee(request):
 		if feeform.is_valid():
 			fee = hmod.Fee.objects.get(rental_item_id=rental.id)
 			fee.amount = feeform.cleaned_data['amount']
+			fee.paid = feeform.cleaned_data['paid']
 			fee.waived = feeform.cleaned_data['waived']
 			fee.days_late = feeform.cleaned_data['days_late']
 			fee.description = feeform.cleaned_data['description']
-			fee.rental_item_id = feeform.cleaned_data['rental_item']
+			#fee.rental_item_id = feeform.cleaned_data['rental_item']
 
 			fee.save()
 
@@ -228,6 +236,7 @@ def edit_fee(request):
 	params['feeform'] = feeform
 	params['rental'] = rental
 	params['fee'] = fee
+	params['customer'] = customer
 
 	return templater.render_to_response(request, 'rental.edit_fee.html', params)
 
@@ -257,13 +266,14 @@ class TransactionForm(forms.Form):
 #Fee Edit Form
 class FeeForm(forms.Form):
 	amount = forms.CharField(label="Fee Amount", required=True)
-	waived = forms.CharField(label="Fee Waived", required=True)
+	paid = forms.BooleanField(label="Fee Paid", required=False)
+	waived = forms.BooleanField(label="Fee Waived", required=False)
 	days_late = forms.CharField(label="Days Late", required=True)
 	description = forms.CharField(label="Description", required=True)
-	rental_item = forms.CharField(label="Rental item", required=True)
+	#rental_item = forms.CharField(label="Rental item", required=True, disabled=True)
 
 
-#Delete
+#Delete Fee
 @view_function
 #This permission required will allow managers to delete
 @permission_required('home.agent',login_url='/user/user/')
@@ -273,6 +283,115 @@ def delete(request):
 	fee.delete()
 
 	return HttpResponseRedirect('/rental/rentals.view')
+
+
+#Pay Fee
+@view_function
+#This permission required will allow managers to delete
+@permission_required('home.agent',login_url='/user/user/')
+def pay(request):
+    fee = hmod.Fee.objects.get(id=request.urlparams[0])
+    customer = hmod.User.objects.get(id=request.urlparams[1])
+
+    print(">>>>>>",customer.first_name)
+    print(fee.paid, fee.id, fee.amount)
+
+    params = {}
+    
+    params['total_cost'] = fee.amount
+    params['customer'] = customer
+    params['fee'] = fee
+
+    templater = get_renderer('product')
+
+    return templater.render_to_response(request, 'checkout_fee.html', params)
+
+
+#Submit Payment cart
+@view_function
+def pay_fee(request):
+    #This gets called by the checkout_button and these are the params on the url
+    #"/product/shopping_cart.checkout/${total_price}/"
+    #/totalprice= [0]
+    #/customer = [1]
+    # fee = [2]
+    
+    params = {}
+    total = request.urlparams[0]
+    customer = hmod.User.objects.get(id=request.urlparams[1])
+    fee = hmod.Fee.objects.get(id=request.urlparams[2])
+
+    params['total'] = total
+    params['customer'] = customer
+    params['fee'] = fee
+    print(">>>>>>Total Cost: ", total)
+    print(">>>>>>Total Customer: ", customer.first_name)
+    print(">>>>>>Total Fee: ", fee.amount)
+
+    print(">>>>>>PAID:", fee.paid)
+    print(">>>>>>ID:", fee.id)
+    fee.paid = True
+    fee.save()
+    print(">>>>>>PAID:", fee.paid)
+
+    ##Conan Code from March 24
+    #Send the request with the data
+    API_URL = 'http://dithers.cs.byu.edu/iscore/api/v1/charges'
+    API_KEY = '477070d45ad5ea0bd7b060d2243c4fdf'
+
+    r = requests.post(API_URL, data={
+        'apiKey': API_KEY,
+        'currency': 'USD',
+        'amount': request.urlparams[0],
+        'type': 'Visa',
+        'number': '4732817300654',
+        'exp_month': '10',
+        'exp_year': '15',
+        'cvc': '411',
+        'name': 'Cosmo Limesandal',
+        'description': 'Charge for Cosmo',
+    })
+
+    #Print response
+    print(r.text)
+
+    #Parse the response to a dictionary
+    resp = r.json()
+
+    if 'error' in resp: #error?
+        print('ERROR: ', resp['error'])
+
+    else:
+        print(resp.keys())
+        print(resp['ID'])
+
+
+    # params['ID'] = resp['ID']
+    # params['Amount'] = resp['Amount']
+    # params['Date'] = resp['Date']
+    # params['Description'] = resp['Description']
+
+    params['resp'] = resp
+
+    cart = request.session.get('cart', {})
+    print(cart.keys())
+
+    ##Email Receipt
+    subject = "Colonial Heritage Foundation Receipt"
+    message = "Dear " + customer.first_name + " " + customer.last_name + ",\n\n"
+
+    message += "Thank you for paying your fee:\n"
+    message += "Date: "  + str(resp['Date'])
+    message += "\nAmount: "  + str(resp['Amount'])
+
+    message += "\n\n\nYour friends at Colonial!"
+
+    send_mail( subject , message, 'group13chf@gmail.com',
+    ['group13chf@gmail.com'], fail_silently=False)
+
+    return templater.render_to_response(request, 'fee_receipt.html', params)
+
+
 
 
 #Add to cart
@@ -596,12 +715,12 @@ def checkout(request):
 
 
     total_cost = cart['Total']
-    user = hmod.User.objects.get(id=cart['Customer'])
+    users = hmod.User.objects.get(id=cart['Customer'])
 
     params = {}
     
     params['total_cost'] = total_cost
-    params['user'] = user
+    params['user'] = users
 
     templater = get_renderer('product')
 

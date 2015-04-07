@@ -1,0 +1,48 @@
+<%inherit file="/home/templates/base.htm" />
+
+<%block name="top_banner">
+	<div class="top_banner">Total Cost: $${total_cost} </div>
+</%block>
+
+##Right now I have the rentals fedding into this checkout page. This causes some errors in naming conventions.
+
+<%block name="contents">
+    ##These are the params that were passed to this page
+	##params = {'total_cost': total_cost}
+	## param customer
+	## params['fee'] = fee
+	
+	<h1 class="heading">Payment Information</h1>
+	<div class="checkout_form">
+	    <form>
+	        Card Type:
+	        
+	        <br><select>
+	            <option value="Visa">Visa</option>
+	            <option value="Discover">Discover</option>
+	            <option value="AmericanExpress">American Express</option>
+	            <option value="MasterCard">Master Card</option>
+	        </select><br>
+
+	        Name on Card:<br>
+	        <input type="text" maxlength="100" name="Name" value=${ customer.first_name }><br>
+	        
+	        Card Number:<br>
+	        <input type="number" maxlength="40" name="Lastname" value="4732817300654"><br>
+
+	        Exp Month: <br>
+	        <input type="number" maxlength="10" name="Pin" value="10"><br>
+	        
+	        Exp Year:<br>
+	        <input type="text" maxlength="500" name="Address" value="15"><br>
+	        
+	        CVC Code:<br>
+	        <input type="text" maxlength="500" name="City" value="411"><br>
+	        
+	        <br><br>
+	        <a href="/rental/rentals.pay_fee/${total_cost}/${customer.id}/${fee.id}" class="purchase_button btn btn-success btn" role="button">Pay Fee</a>
+	    </form>
+
+	</div>
+
+</%block>

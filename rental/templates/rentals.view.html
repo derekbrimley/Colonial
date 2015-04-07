@@ -28,7 +28,7 @@
 					<th>Date Due</th>
 					<th>Status</th>
 					<th>Product</th>
-					<th>Fee</th>
+					<th>Fee</th>s
 					<th>Actions</th>
 				</tr>
 
@@ -39,10 +39,10 @@
 							%if rental.transaction_id == transaction.id:
 								<td>${rental.id}</td>
 
-								%for user in users:
-									%if transaction.customer_id == user.id:
-										<td>${user.first_name} ${user.last_name}</td>
-										<td>${user.email}</td>
+								%for person in users:
+									%if transaction.customer_id == person.id:
+										<td>${person.first_name} ${person.last_name}</td>
+										<td>${person.email}</td>
 									%endif
 								%endfor
 
@@ -69,7 +69,11 @@
 						<td>
 							%for fee in fees:
 								%if fee.rental_item_id == rental.id:
-									<p id="red">Yes</p>
+									%if fee.paid == True:
+										<p id="green">Yes</p>
+									%else:
+										<p id="red">Yes</p>
+									%endif
 						  		%endif
 						  	%endfor
 						</td>
@@ -87,8 +91,8 @@
 						## %endif
 
 						<td>
-							<a href="/rental/rentals.edit/${rental.id}/${transaction.id}/${user.id}/${product.id}/">Edit</a> | 
-							<a href="/rental/rentals.delete/${rental.id}/${transaction.id}/${user.id}/${product.id}/${fee.id}">Delete</a>
+							<a href="/rental/rentals.edit/${rental.id}/">Edit</a> | 
+							<a href="/rental/rentals.delete/${rental.id}/${fee.id}">Delete</a>
 						</td>
 
 					</tr>

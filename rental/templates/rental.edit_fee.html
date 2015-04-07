@@ -19,7 +19,8 @@
 			</table>
 			<div id="form_buttons">
 				<button type="submit" class="btn btn-primary">Submit</button>
-				<a href="/rental/rentals.delete/${ fee.id }/" class="btn btn-warning">Delete Fee</a>
+				<a href="/rental/rentals.pay/${ fee.id }/${customer.id}" class="btn btn-success">Pay Fee</a>
+				<a href="/rental/rentals.delete/${ fee.id }/" class="btn btn-danger">Delete Fee</a>
 			</div>
 		</form>
 

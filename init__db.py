@@ -610,16 +610,17 @@ for data in [
 
 # Fee
 for data in [
-    [ 1.00, False, "Gun #1 was not returned clean by Rommel", 1],
-    [ 1.00, False, "Gun #2 was not returned clean by Rommel", 2],
-    [ 10.00, False, "Sword #1 was not returned clean by Washington", 4],
-    [ 10.00, False, "Sword #6 was not returned clean by Washington", 9],
+    [ 1.00, False, False, "Gun #1 was not returned clean by Rommel", 1],
+    [ 1.00, False, False, "Gun #2 was not returned clean by Rommel", 2],
+    [ 10.00, False, True, "Sword #1 was not returned clean by Washington", 4],
+    [ 10.00, False, True, "Sword #6 was not returned clean by Washington", 9],
 ]:
     u = hmod.Fee()
     u.amount = data[0]
     u.waived = data[1]
-    u.description = data[2]
-    u.rental_item_id = data[3]
+    u.paid = data[2]
+    u.description = data[3]
+    u.rental_item_id = data[4]
     u.save()
 
 
