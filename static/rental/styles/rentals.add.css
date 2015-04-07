@@ -1,0 +1,16 @@
+.item_container {
+	display: inline-block;
+	margin: 25px;
+	padding: 5px;
+	border: 2px solid rgb(35, 30, 94);
+	border-radius: 4px;
+	vertical-align: middle;
+	width: 180px;
+	height: 200px;
+}
+
+.item_container > img {
+	max-width: 125px;
+	max-height: 125px;
+	vertical-align: bottom;
+	}

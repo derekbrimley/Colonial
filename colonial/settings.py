@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'product',
     'event',
     'rental',
-    'password_reset',
 
 )
 
@@ -97,9 +96,9 @@ LOGGING = {
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'colonial',
+       'NAME': 'postgres',
        'USER': 'postgres',
-       'PASSWORD': 'kevntseeg',
+       'PASSWORD': 'Password1',
        'HOST': '127.0.0.1',
        'PORT': '5432',
    }
@@ -126,7 +125,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
  # SECURITY WARNING: this next line must be commented out at deployment
- BASE_DIR,  
+ # BASE_DIR,  
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 
