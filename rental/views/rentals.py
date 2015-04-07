@@ -9,9 +9,10 @@ from django_mako_plus.controller.router import get_renderer
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group, Permission
 import time
-from datetime import date
-import decimal 
-
+from datetime import date, datetime
+import decimal
+import json
+# from datetime import datetime
 
 templater = get_renderer('rental')
 
@@ -661,3 +662,45 @@ def checkout(request):
     #     for field in form:
     #         for value in field:
     #             print(">>>>>Form", field.name, value.value)
+
+
+#Check out rentalcart
+@view_function
+def bulk_return(request):
+    params = {}
+    bulk_json = request.REQUEST.get('bulk')
+    userid =  request.REQUEST.get('userid')
+    bulk_items = []
+    rentals = []
+    # rentals_selected = request.session.get('rentals_selected', [])
+    try:
+        user = hmod.User.objects.get(id=int(userid))
+        request.session['rental_user'] = int(user.id)  ##session instantiated
+    except:
+        print('error 298298298ddd2')
+    try:
+        bulk_return = json.loads(bulk_json)
+        for bulk_returns in bulk_return:
+            try:
+                print('test here',bulk_returns)
+                rentalitem = hmod.RentalItem.objects.get(id=int(bulk_returns))
+                rentalitem.date_in = datetime.now()
+                rentalitem.save()
+            except:
+                print('error 298298298ddd2ssad')
+    except:
+        print('error sadfasdf2')
+
+
+    params = {
+        'user': user,
+        'bulk_items': bulk_items,
+        # 'rentals_selected': rentals_selected,
+        'rentals': rentals
+    }
+    return HttpResponse('''
+                <script>
+                    window.location.href = '/rental/rentals.view/';
+                </script>
+             ''')
+    # return templater.render_to_response(request, 'bulk_rentals_ajax.html', params)
