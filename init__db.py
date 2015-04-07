@@ -107,7 +107,7 @@ for data in [
 
 con = None
 try:    
-    con = psycopg2.connect("dbname='colonial' user='postgres' password='kevntseeg'")   
+    con = psycopg2.connect("dbname='colonial' user='postgres' password='password'")   
     cur = con.cursor()    
     #cur.execute("CREATE TABLE Cars(Id INTEGER PRIMARY KEY, Name VARCHAR(20), Price INT)")
 
@@ -171,7 +171,7 @@ finally:
 
 
 # try:
-#     con = psycopg2.connect(database="colonial", user="postgres", password="kevntseeg") 
+#     con = psycopg2.connect(database="colonial", user="postgres", password="password") 
     
 #     cur = con.cursor()
 #     data = readImage()

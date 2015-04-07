@@ -7,6 +7,8 @@
 
 
 <%block name="contents">
+<div class="replace_me2">
+
 	##For the >= agent
 	##params['transactions'] = transactions
 	##params['rentals'] = rentals
@@ -30,6 +32,7 @@
 					<th>Product</th>
 					<th>Fee</th>
 					<th>Actions</th>
+                    <th><input class="bulk-return" type="checkbox"></th>
 				</tr>
 
 			##For each photo in the photographs [received from params in product.py]	
@@ -90,6 +93,13 @@
 							<a href="/rental/rentals.edit/${rental.id}/${transaction.id}/${user.id}/${product.id}/">Edit</a> | 
 							<a href="/rental/rentals.delete/${rental.id}/${transaction.id}/${user.id}/${product.id}/${fee.id}">Delete</a>
 						</td>
+                    %if rental.date_in == None:
+        ##            <td><a href="/rentalreturns.returns/${user.id}/${rental.id}/" class="btn btn-xs btn-default">Return</a></td>
+                        <td><input  type="checkbox" class="actice-checkbox" value="${rental.id}"></td>
+                    %else:
+        ##                <td>Returned</td>
+                        <td><input type="checkbox" disabled readonly></td>
+                    %endif
 
 					</tr>
 					%endfor
@@ -98,6 +108,7 @@
 			<div class="text-center">
 				<a href="/rental/rentals/" class="btn btn btn-primary ">Back</a>
 				<a href="/rental/rentals.add_customer/" class="btn btn btn-success">Add New Rental</a>
+                <td><a data-userid="${user.id}" class="btn btn btn-success mass-return">Bulk Return</a></td>
 			</div>
 		
 		##If there are no transactions
@@ -153,6 +164,7 @@
 						%endfor
 					</tr>
 					%endfor
+
 			</table>
 		
 		##If there are no transactions for this person.
@@ -164,5 +176,5 @@
 		%endif
 
 	%endif
-
+</div>
 </%block>
